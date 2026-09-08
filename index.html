@@ -1,84 +1,232 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gabriel & Adriely • Nosso Compromisso</title>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uma surpresa para Adriely Raquel ❤️</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#08080c;color:#f6f1f3;font-family:Inter,system-ui,sans-serif}.wrap{max-width:900px;margin:auto;padding:18px}.card{overflow:hidden;border:1px solid #3a2933;border-radius:26px;background:linear-gradient(145deg,#181217,#0d0b10);box-shadow:0 25px 90px #000b}.top{padding:42px 30px;border-bottom:1px solid #35262f;text-align:center;background:radial-gradient(circle at 50% 0,#d66f9c22,transparent 45%)}.tiny{text-transform:uppercase;letter-spacing:.25em;color:#db91ad;font-size:10px;font-weight:800}.top h1{font:700 42px Georgia,serif;margin:13px 0 8px}.top p{color:#bdb3b9;margin:0}.body{padding:30px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.box{padding:15px;border:1px solid #332832;background:#111015;border-radius:14px}.box small{display:block;color:#8f858c;text-transform:uppercase;font-size:10px;letter-spacing:.12em}.box b{display:block;margin-top:5px}.section{margin-top:28px}.section h2{font:700 23px Georgia,serif;margin:0 0 12px}.text{color:#cec6cb;line-height:1.8}.letter{padding:24px;border:1px solid #4a303c;background:linear-gradient(145deg,#171017,#120e13);border-radius:18px;color:#e2d7dd;line-height:1.9}.letter .big{font:700 22px Georgia,serif;color:#f1dce5}.sigs{display:grid;grid-template-columns:1fr 1fr;gap:16px}.sig{border:1px solid #332832;background:#111015;border-radius:18px;padding:16px}.sigtitle{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.sigtitle small{color:#8f858c}.canvas{width:100%;height:175px;background:#fcfbf8;border-radius:12px;display:block;touch-action:none}.btn{border:0;border-radius:12px;padding:13px 18px;margin:12px 8px 0 0;font-weight:800;cursor:pointer}.main{background:#df8eae;color:#1a0d13}.dark{background:#29242c;color:#fff}.result{display:none;margin-top:24px;padding:14px;border-radius:18px;border:1px solid #332832;background:#111015}.result canvas{width:100%;display:block;background:white;border-radius:12px}@media(max-width:680px){.grid,.sigs{grid-template-columns:1fr}.top h1{font-size:34px}.body{padding:22px}}
-</style></head><body><div class="wrap"><div class="card">
-<div class="top"><div class="tiny">Declaração pessoal</div><h1>Gabriel & Adriely ❤️</h1><p>Meu compromisso com você, escrito de coração.</p></div>
-<div class="body">
-<div class="grid"><div class="box"><small>Eu</small><b>Gabriel</b></div><div class="box"><small>Para</small><b>Adriely</b></div><div class="box"><small>Vigência</small><b>Prazo indeterminado</b></div><div class="box"><small>O que eu quero</small><b>Amar, cuidar e viver ao seu lado</b></div></div>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;font-family:Arial,Helvetica,sans-serif}
+body{overflow:hidden;background:#090308;color:#fff}
+.screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transform:scale(1.03);transition:.65s}
+.screen.active{opacity:1;pointer-events:auto;transform:scale(1)}
+.bg{position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,70,120,.28),transparent 35%),radial-gradient(circle at 80% 80%,rgba(255,0,80,.25),transparent 35%),linear-gradient(145deg,#160712,#350a20 52%,#080308)}
+.card{position:relative;z-index:2;width:min(92vw,430px);max-height:90vh;overflow:auto;padding:30px 23px;text-align:center;border:1px solid rgba(255,255,255,.2);border-radius:30px;background:rgba(255,255,255,.09);backdrop-filter:blur(15px);box-shadow:0 25px 80px rgba(0,0,0,.45)}
+.small{font-size:13px;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:13px}
+h1{font-size:clamp(29px,8vw,42px);margin:0 0 15px}
+h2{font-size:27px;margin:0 0 17px}
+.text{font-size:17px;line-height:1.65;opacity:.95}
+.photo{width:82px;height:82px;object-fit:cover;border-radius:50%;border:3px solid #fff;display:block;margin:0 auto 17px}
+button{border:0;border-radius:999px;padding:14px 23px;margin:8px 4px 0;font-size:16px;font-weight:bold;cursor:pointer;transition:.25s}
+button:hover{transform:scale(1.06)}
+.primary{background:#fff;color:#b20d45}
+.secondary{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
+.progress{position:fixed;z-index:30;top:14px;left:50%;transform:translateX(-50%);width:130px;height:4px;border-radius:9px;background:rgba(255,255,255,.18);overflow:hidden}
+.progress span{display:block;width:11%;height:100%;background:#fff;transition:.5s}
+.heart{position:fixed;z-index:1;bottom:-40px;pointer-events:none;animation:up linear forwards}
+@keyframes up{to{transform:translateY(-115vh) rotate(360deg);opacity:0}}
+.hidden{display:none!important}
+.final{font-size:20px;line-height:1.65}
+.signature{margin-top:22px;font-size:18px;font-weight:bold}
+#noBtn{position:relative}
+</style>
+</head>
+<body>
 
-<div class="section"><h2>Minha promessa</h2><div class="text">
-<p>Eu quero construir algo bonito com você. Quero que nosso relacionamento tenha carinho, respeito, confiança, cumplicidade e muita conversa.</p>
-<p>Eu prometo tentar estar presente, ouvir você e valorizar cada momento que a gente tiver juntos. Quando estiver tudo bem, quero comemorar com você. Quando estiver difícil, quero conversar e tentar resolver ao seu lado.</p>
-<p>Eu não quero que você precise adivinhar o que eu sinto. Quero demonstrar, falar, cuidar e fazer você perceber o quanto é importante para mim.</p>
-</div></div>
+<div class="progress"><span id="bar"></span></div>
 
-<div class="section"><h2>Uma carta para você</h2><div class="letter"><div class="big">Adriely,</div><p>Eu te amo demais. ❤️</p><p>Você se tornou alguém muito especial para mim, e eu quero que você saiba que não estou fazendo isso só por fazer. Estou escrevendo porque quero deixar registrado, do meu jeito, aquilo que sinto por você.</p><p>Eu quero estar perto de você, conversar sobre coisas bobas, rir das nossas besteiras, criar memórias e ter alguém para dividir tanto os dias incríveis quanto aqueles dias em que nada parece dar certo.</p><p>Quero cuidar de você sem deixar de respeitar seu espaço. Quero te apoiar, te ouvir e comemorar suas conquistas como se fossem minhas também.</p><p>Se algum dia a gente passar por uma fase difícil, eu quero lembrar que conversar é melhor do que simplesmente desistir. Quero escolher o diálogo, o carinho e o respeito.</p><p>Eu sei que ninguém é perfeito. Eu também não sou. Mas eu quero ser melhor por mim e também pela nossa relação. Quero aprender com os meus erros e continuar demonstrando o que sinto.</p><p class="big">Eu te amo muito, Adriely. Quero você comigo e quero viver muitos momentos ao seu lado. ❤️</p><p>Com carinho,<br><b>Gabriel</b></p></div></div>
+<!-- 1 -->
+<section class="screen active" id="s1"><div class="bg"></div><div class="card">
+<div class="small">Uma pequena surpresa</div>
+<h1>Oi, Adriely ❤️</h1>
+<p class="text">Antes de você continuar, eu só quero que saiba que eu fiz isso pensando em você.</p>
+<button class="primary" onclick="next()">Começar</button>
+</div></section>
 
-<div class="section"><h2>Nosso compromisso</h2><div class="text"><p>Eu quero que este compromisso seja por prazo indeterminado, enquanto nós dois quisermos continuar juntos. Para mim, o mais importante é que exista vontade dos dois, respeito, confiança e carinho.</p><p>Este documento é simbólico e afetivo, feito como uma lembrança da minha declaração para você.</p></div></div>
+<!-- 2 -->
+<section class="screen" id="s2"><div class="bg"></div><div class="card">
+<div class="small">Antes de tudo...</div>
+<h2>Eu queria te dizer uma coisa ❤️</h2>
+<p class="text">Eu poderia simplesmente te mandar uma mensagem, mas achei que você merecia algo diferente. Então fiz isso pensando em cada detalhe.</p>
+<button class="primary" onclick="next()">Continuar ❤️</button>
+</div></section>
 
-<div class="section"><h2>Assinaturas</h2><div class="sigs">
-<div class="sig"><div class="sigtitle"><b>Gabriel</b><small>minha assinatura</small></div><canvas id="a" class="canvas"></canvas><button class="btn dark" onclick="genGabriel()">Refazer assinatura</button></div>
-<div class="sig"><div class="sigtitle"><b>Adriely</b><small>assine aqui</small></div><canvas id="b" class="canvas"></canvas><button class="btn dark" onclick="genAdriely()">Refazer assinatura</button></div>
+<!-- 3 -->
+<section class="screen" id="s3"><div class="bg"></div><div class="card">
+<div class="small">Talvez você nem imagine</div>
+<h2>O quanto você é importante</h2>
+<p class="text">Às vezes eu fico pensando em como uma pessoa consegue ocupar tanto espaço nos pensamentos da gente. E, de alguma forma, você conseguiu.</p>
+<button class="primary" onclick="next()">Continuar</button>
+</div></section>
+
+<!-- 4 -->
+<section class="screen" id="s4"><div class="bg"></div><div class="card">
+<div class="small">Uma lembrança</div>
+<h2>Eu gosto dos nossos momentos 😌</h2>
+<p class="text">Gosto das conversas, das brincadeiras, das risadas e até daqueles momentos simples que talvez pareçam bobos, mas que acabam ficando na memória.</p>
+<button class="primary" onclick="next()">Mais uma ❤️</button>
+</div></section>
+
+<!-- 5 -->
+<section class="screen" id="s5"><div class="bg"></div><div class="card">
+<div class="small">Sendo sincero...</div>
+<h2>Você mexe comigo</h2>
+<p class="text">Tem alguma coisa em você que me faz querer estar perto, conversar mais, saber como foi seu dia e compartilhar um pouco mais da minha vida com você.</p>
+<button class="primary" onclick="next()">Continuar</button>
+</div></section>
+
+<!-- 6 -->
+<section class="screen" id="s6"><div class="bg"></div><div class="card">
+<div class="small">Não é só por hoje</div>
+<h2>Eu quero construir algo ❤️</h2>
+<p class="text">Não estou fazendo isso por impulso. Eu pensei bastante antes de preparar tudo, porque queria encontrar uma forma especial de falar o que sinto.</p>
+<button class="primary" onclick="next()">Continuar</button>
+</div></section>
+
+<!-- 7 -->
+<section class="screen" id="s7"><div class="bg"></div><div class="card">
+<div class="small">De verdade...</div>
+<h2>Eu quero você na minha vida</h2>
+<p class="text">Quero ter você por perto nos dias bons, nos dias difíceis, nas conversas sem assunto e nas pequenas coisas que fazem a vida ficar melhor.</p>
+<button class="primary" onclick="next()">Ainda tem mais 😭❤️</button>
+</div></section>
+
+<!-- 8 -->
+<section class="screen" id="s8"><div class="bg"></div><div class="card">
+<div class="small">E eu ainda não terminei</div>
+<h2>Porque você merece saber...</h2>
+<p class="text">Que tudo isso foi preparado com carinho. Cada tela que você está vendo existe porque eu queria transformar algumas palavras em um momento que você pudesse guardar.</p>
+<button class="primary" onclick="next()">Continuar ❤️</button>
+</div></section>
+
+<!-- 9 -->
+<section class="screen" id="s9"><div class="bg"></div><div class="card">
+<div class="small">Só mais uma coisa...</div>
+<h2>Eu escolhi você</h2>
+<p class="text">Entre tantas pessoas, é você quem eu quero conhecer cada vez mais. É você com quem eu quero viver novos momentos e criar novas lembranças.</p>
+<button class="primary" onclick="next()">Agora falta pouco...</button>
+</div></section>
+
+<!-- 10 -->
+<section class="screen" id="s10"><div class="bg"></div><div class="card">
+<div class="small">Respira comigo 😂❤️</div>
+<h2>Chegando perto...</h2>
+<p class="text">Eu sei que já tem bastante coisa escrita aqui, mas eu precisava fazer assim. Queria que você sentisse que não foi só uma pergunta qualquer.</p>
+<button class="primary" onclick="next()">Continuar</button>
+</div></section>
+
+<!-- 11 -->
+<section class="screen" id="s11"><div class="bg"></div><div class="card">
+<div class="small">Agora falando sério</div>
+<h2>Eu gosto de você. Muito.</h2>
+<p class="text">E talvez eu não consiga colocar tudo o que sinto em palavras, mas espero que você consiga perceber a intenção por trás de cada uma delas.</p>
+<button class="primary" onclick="next()">Mais uma ❤️</button>
+</div></section>
+
+<!-- 12 -->
+<section class="screen" id="s12"><div class="bg"></div><div class="card">
+<div class="small">Quase lá...</div>
+<h2>Imagina nós dois daqui pra frente</h2>
+<p class="text">Mais conversas, mais risadas, mais histórias, mais momentos juntos e, principalmente, a chance de descobrir até onde essa história pode chegar.</p>
+<button class="primary" onclick="next()">Continuar 😭</button>
+</div></section>
+
+<!-- 13 -->
+<section class="screen" id="s13"><div class="bg"></div><div class="card">
+<div class="small">Última mensagem antes da pergunta</div>
+<h2>Eu espero que você sorria ❤️</h2>
+<p class="text">Porque enquanto você lê tudo isso, eu só consigo imaginar sua reação. E espero de verdade que esse momento fique marcado de uma forma boa pra você.</p>
+<button class="primary" onclick="next()">Agora sim...</button>
+</div></section>
+
+<!-- 14 -->
+<section class="screen" id="s14"><div class="bg"></div><div class="card">
+<div class="small">Chegou a hora</div>
+<h2>Adriely Raquel...</h2>
+<p class="text">Depois de tantas mensagens, tantos pensamentos e tanto suspense, finalmente chegou a parte que eu estava esperando desde o começo.</p>
+<button class="primary" onclick="next()">Pode perguntar ❤️</button>
+</div></section>
+
+<!-- 9 -->
+<section class="screen" id="s15"><div class="bg"></div><div class="card">
+<div class="small">Biel → Adriely</div>
+<h2>Chegou a hora...</h2>
+<p class="final"><b>Adriely Raquel,</b><br><br>você aceita namorar comigo?</p>
+<div>
+<button class="primary" onclick="yes()">SIM ❤️</button>
+<button class="secondary" id="noBtn" onclick="runNo()">NÃO 😭</button>
 </div>
-<button class="btn main" onclick="finalize()">❤️ Gerar documento em imagem</button><button class="btn dark" onclick="share()">Compartilhar</button>
-<div class="result" id="result"><canvas id="out"></canvas><button class="btn main" onclick="share()">Compartilhar imagem</button></div>
-</div></div></div>
+<div id="result" class="hidden">
+<p class="final"><br><b>EU SABIA! 😭❤️</b><br><br>Agora começa uma nova parte da nossa história.</p>
+<div class="signature">Com carinho,<br>Biel ❤️</div>
+<button class="primary" onclick="shareWhatsApp()">Compartilhar no WhatsApp 💚</button>
+</div>
+</div></section>
 
 <script>
-function setup(id){
- let c=document.getElementById(id),x=c.getContext('2d'),d=devicePixelRatio||1;
- c.width=c.clientWidth*d;c.height=c.clientHeight*d;x.scale(d,d);
- x.strokeStyle='#17131a';x.fillStyle='#17131a';x.lineWidth=2.2;x.lineCap='round';x.lineJoin='round';
- let down=false;
- c.onpointerdown=e=>{down=true;let r=c.getBoundingClientRect();x.beginPath();x.moveTo(e.clientX-r.left,e.clientY-r.top)};
- c.onpointermove=e=>{if(!down)return;let r=c.getBoundingClientRect();x.lineTo(e.clientX-r.left,e.clientY-r.top);x.stroke()};
- c.onpointerup=c.onpointerleave=()=>down=false;
-}
-setup('a');setup('b');
+let current=1;
+const total=15;
 
-function clearC(id){let c=document.getElementById(id);c.getContext('2d').clearRect(0,0,c.width,c.height)}
+// Cada tela fica visível por 2 minutos antes de avançar automaticamente.
+let autoAdvanceTimer = null;
 
-function signatureText(id,name,seed){
- let c=document.getElementById(id),x=c.getContext('2d'),d=devicePixelRatio||1,w=c.clientWidth,h=c.clientHeight;
- clearC(id);x.save();x.scale(d,d);x.fillStyle='#17131a';
- x.font='italic 52px "Brush Script MT","Segoe Script","URW Chancery L",cursive';
- x.textBaseline='middle';
- x.fillText(name,w*.12,h*.47);
- x.strokeStyle='#17131a';x.lineWidth=1.8;x.lineCap='round';
- x.beginPath();x.moveTo(w*.10,h*.70);x.bezierCurveTo(w*.35,h*.82,w*.66,h*.76,w*.89,h*.63);x.stroke();
- x.restore();
+function updateBar(){
+ document.getElementById("bar").style.width=(current/total*100)+"%";
 }
 
-function genGabriel(){signatureText('a','Gabriel',1)}
-function genAdriely(){signatureText('b','Adriely',2)}
-genGabriel();
-
-function data(id){return document.getElementById(id).toDataURL('image/png')}
-
-function finalize(){
- let c=document.getElementById('out'),x=c.getContext('2d'),W=1400,H=2200;
- c.width=W;c.height=H;x.fillStyle='#fffdf9';x.fillRect(0,0,W,H);
- x.fillStyle='#24161e';x.font='700 58px Georgia';x.fillText('MEU COMPROMISSO',105,120);
- x.fillStyle='#c65e86';x.font='700 25px Arial';x.fillText('GABRIEL → ADRIELY ❤️',105,168);
- x.fillStyle='#49444a';x.font='21px Arial';x.fillText('Declaração de amor • prazo indeterminado',105,208);
- x.fillStyle='#24161e';x.font='700 25px Georgia';x.fillText('MINHA PROMESSA',105,300);
- x.fillStyle='#49444a';x.font='20px Arial';
- let a=['Quero construir algo bonito com você.','Prometo tentar estar presente e ouvir você.','Quero cuidar dos seus sentimentos e valorizar cada momento.','Quero demonstrar meu amor, não apenas falar dele.','Nos momentos difíceis, quero escolher o diálogo e o respeito.'];
- let y=345;a.forEach(t=>{x.fillText('• '+t,105,y);y+=54});
- x.fillStyle='#24161e';x.font='700 25px Georgia';x.fillText('MINHA DECLARAÇÃO',105,650);
- x.fillStyle='#49444a';x.font='20px Arial';
- let b=['Adriely, eu te amo demais. ❤️','Você é muito especial para mim.','Quero estar perto, rir, conversar e criar memórias.','Quero te apoiar e comemorar suas conquistas.','Quero aprender com meus erros e ser melhor.','Eu te amo muito e quero viver muitos momentos','ao seu lado. ❤️'];
- y=700;b.forEach(t=>{x.fillText(t,105,y);y+=45});
- x.fillStyle='#24161e';x.font='700 25px Georgia';x.fillText('ASSINATURAS',105,1080);
- x.strokeStyle='#ddd5d9';x.strokeRect(105,1120,530,370);x.strokeRect(765,1120,530,370);
- let i1=new Image(),i2=new Image();
- i1.onload=()=>{x.drawImage(i1,130,1175,480,195);x.fillStyle='#49444a';x.font='20px Arial';x.fillText('Gabriel',130,1455);
- i2.onload=()=>{x.drawImage(i2,790,1175,480,195);x.fillText('Adriely',790,1455);x.fillStyle='#c65e86';x.font='700 20px Arial';x.fillText('EU TE AMO • PRAZO INDETERMINADO ❤️',105,1580);x.fillStyle='#777178';x.font='16px Arial';x.fillText('Declaração simbólica e afetiva.',105,1630);document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'})};i2.src=data('b')};i1.src=data('a');
+function startAutoAdvance(){
+ clearTimeout(autoAdvanceTimer);
+ if(current < total){
+  autoAdvanceTimer = setTimeout(()=>{
+   next();
+  }, 120000);
+ }
 }
-async function share(){
- let c=document.getElementById('out');if(!c.width||!c.height){finalize();return}
- c.toBlob(async b=>{let f=new File([b],'meu-compromisso-gabriel-adriely.png',{type:'image/png'});
- if(navigator.share&&navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({title:'Meu compromisso com Adriely ❤️',text:'Minha declaração para Adriely.',files:[f]})}
- else{let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f.name;a.click();alert('Imagem salva. Agora é só enviar pelo WhatsApp.')}},'image/png')
+
+function next(){
+ clearTimeout(autoAdvanceTimer);
+ if(current >= total) return;
+ document.getElementById("s"+current).classList.remove("active");
+ current++;
+ document.getElementById("s"+current).classList.add("active");
+ updateBar();
+ startAutoAdvance();
 }
-</script></body></html>
+
+function yes(){
+ document.getElementById("result").classList.remove("hidden");
+ document.getElementById("noBtn").style.display="none";
+ document.querySelector("#s15 h2").innerHTML="Ela disse SIM! ❤️";
+ for(let i=0;i<45;i++) setTimeout(createHeart,i*55);
+}
+
+function runNo(){
+ const b=document.getElementById("noBtn");
+ b.style.position="fixed";
+ b.style.left=Math.max(10,Math.random()*(innerWidth-b.offsetWidth-20))+"px";
+ b.style.top=Math.max(10,Math.random()*(innerHeight-b.offsetHeight-20))+"px";
+}
+
+function shareWhatsApp(){
+ const text="Adriely Raquel ❤️ O Biel acabou de fazer uma pergunta muito importante... e você disse SIM! 😭❤️";
+ const url="https://wa.me/?text="+encodeURIComponent(text);
+ window.open(url,"_blank");
+}
+
+function createHeart(){
+ const h=document.createElement("div");
+ h.className="heart";
+ h.textContent=["❤️","💗","💖","💕","💘"][Math.floor(Math.random()*5)];
+ h.style.left=Math.random()*100+"vw";
+ h.style.fontSize=(15+Math.random()*24)+"px";
+ h.style.animationDuration=(3+Math.random()*4)+"s";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),7000);
+}
+
+setInterval(createHeart,750);
+updateBar();
+startAutoAdvance();
+</script>
+</body>
+</html>
