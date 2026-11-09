@@ -8,20 +8,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Montserrat & Inter -->
+    <!-- Google Fonts: Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         * { font-family: 'Montserrat', sans-serif; }
-
         body {
             background: radial-gradient(circle at 50% 20%, #4a152d 0%, #201335 40%, #100f24 70%, #080811 100%);
             min-height: 100vh;
             color: #f8fafc;
         }
-
         .shimmer-text {
             background: linear-gradient(90deg, #ffffff 0%, #f472b6 25%, #ffffff 50%, #a78bfa 75%, #ffffff 100%);
             background-size: 200% auto;
@@ -31,11 +29,7 @@
             animation: shine 3.5s linear infinite;
             filter: drop-shadow(0 0 10px rgba(244, 114, 182, 0.3));
         }
-
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
+        @keyframes shine { to { background-position: 200% center; } }
         .glass-card-ref {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
             backdrop-filter: blur(35px);
@@ -43,7 +37,6 @@
             border: 1px solid rgba(255, 255, 255, 0.12);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
         }
-
         .line-input {
             border: none;
             border-bottom: 1px solid rgba(255, 255, 255, 0.4);
@@ -56,7 +49,6 @@
             border-bottom-color: #a78bfa;
             box-shadow: 0 2px 10px -2px rgba(167, 139, 250, 0.5);
         }
-
         .btn-gradient-ref {
             background: linear-gradient(90deg, #381b59 0%, #29408b 50%, #4069c9 100%);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -65,42 +57,10 @@
         .btn-gradient-ref:hover {
             opacity: 0.95;
             transform: translateY(-1px);
-            box-shadow: 0 12px 30px rgba(64, 105, 201, 0.6);
         }
-        
-        .custom-checkbox {
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 3px;
-            background: transparent;
-            cursor: pointer;
-            position: relative;
-        }
-        .custom-checkbox:checked {
-            background: #a78bfa;
-            border-color: #a78bfa;
-        }
-        .custom-checkbox:checked::after {
-            content: '✓';
-            position: absolute;
-            color: white;
-            font-size: 11px;
-            font-weight: bold;
-            top: -2px;
-            left: 2px;
-        }
-
-        @keyframes fadeInToast {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .toast-show { animation: fadeInToast 0.3s forwards; }
-
         .disabled-card {
-            opacity: 0.65;
-            filter: grayscale(0.3);
+            opacity: 0.6;
+            filter: grayscale(0.4);
             cursor: not-allowed;
         }
     </style>
@@ -131,27 +91,17 @@
             <!-- FORM LOGIN -->
             <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-6">
                 <div class="relative flex items-center">
-                    <i class="fa-regular fa-envelope text-white/80 text-sm w-6"></i>
-                    <input type="text" id="loginUser" required placeholder="E-mail ou Usuário"
+                    <i class="fa-regular fa-user text-white/80 text-sm w-6"></i>
+                    <input type="text" id="loginUser" required placeholder="Usuário"
                         class="line-input w-full pl-3 pr-2 py-2 text-sm text-white placeholder-white/60">
                 </div>
                 <div class="relative flex items-center">
                     <i class="fa-solid fa-lock text-white/80 text-sm w-6"></i>
                     <input type="password" id="loginPass" required placeholder="Senha"
                         class="line-input w-full pl-3 pr-8 py-2 text-sm text-white placeholder-white/60">
-                    <button type="button" onclick="togglePass('loginPass', 'eyeLogin')" class="absolute right-1 text-white/50 hover:text-white">
-                        <i id="eyeLogin" class="fa-regular fa-eye text-xs"></i>
-                    </button>
-                </div>
-                <div class="flex items-center justify-between text-[11px] text-white/70 pt-1">
-                    <label class="flex items-center space-x-2 cursor-pointer">
-                        <input type="checkbox" class="custom-checkbox">
-                        <span>Lembrar de mim</span>
-                    </label>
-                    <a href="#" onclick="showToast('Link enviado para seu e-mail!')" class="hover:text-white">Esqueceu a senha?</a>
                 </div>
                 <button type="submit" class="btn-gradient-ref w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-widest text-white mt-4">
-                    LOGIN
+                    ENTRAR
                 </button>
             </form>
 
@@ -168,17 +118,9 @@
                         class="line-input w-full pl-3 pr-2 py-1.5 text-sm text-white placeholder-white/60">
                 </div>
                 <div class="relative flex items-center">
-                    <i class="fa-solid fa-phone text-white/80 text-sm w-6"></i>
-                    <input type="tel" id="regPhone" required placeholder="Número de Telefone" oninput="formatPhone(this)" maxlength="15"
-                        class="line-input w-full pl-3 pr-2 py-1.5 text-sm text-white placeholder-white/60">
-                </div>
-                <div class="relative flex items-center">
                     <i class="fa-solid fa-lock text-white/80 text-sm w-6"></i>
                     <input type="password" id="regPass" required placeholder="Senha"
                         class="line-input w-full pl-3 pr-8 py-1.5 text-sm text-white placeholder-white/60">
-                    <button type="button" onclick="togglePass('regPass', 'eyeReg')" class="absolute right-1 text-white/50 hover:text-white">
-                        <i id="eyeReg" class="fa-regular fa-eye text-xs"></i>
-                    </button>
                 </div>
                 <button type="submit" class="btn-gradient-ref w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-widest text-white mt-5">
                     CADASTRAR E ENTRAR
@@ -189,8 +131,6 @@
 
     <!-- TELA DASHBOARD (PAINEL DE MISSÕES) -->
     <div id="dashboardScreen" class="relative z-10 w-full max-w-5xl mx-auto hidden py-4 pb-20">
-        
-        <!-- HEADER DASHBOARD -->
         <header class="flex flex-col md:flex-row md:items-center justify-between glass-card-ref rounded-2xl p-4 md:p-6 mb-6 gap-4">
             <div class="flex items-center space-x-3">
                 <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center font-bold text-xl border-2 border-white/30">
@@ -204,18 +144,17 @@
                 </div>
             </div>
 
-            <!-- CARTÕES DE SALDO -->
             <div class="flex items-center space-x-3">
-                <div class="bg-slate-900/60 border border-purple-500/30 px-4 py-2 rounded-xl text-right flex-1 md:flex-none">
-                    <span class="text-[10px] uppercase font-bold text-purple-300 block">Pontos Recompensa</span>
+                <div class="bg-slate-900/60 border border-purple-500/30 px-4 py-2 rounded-xl text-right">
+                    <span class="text-[10px] uppercase font-bold text-purple-300 block">Pontos</span>
                     <div class="text-xl font-extrabold text-purple-200 flex items-center justify-end space-x-1">
                         <i class="fa-solid fa-coins text-amber-400 text-sm"></i>
                         <span id="ptsBalance">0</span>
                     </div>
                 </div>
 
-                <div class="bg-slate-900/60 border border-emerald-500/30 px-4 py-2 rounded-xl text-right flex-1 md:flex-none">
-                    <span class="text-[10px] uppercase font-bold text-emerald-400 block">Saldo em Reais</span>
+                <div class="bg-slate-900/60 border border-emerald-500/30 px-4 py-2 rounded-xl text-right">
+                    <span class="text-[10px] uppercase font-bold text-emerald-400 block">Saldo (R$)</span>
                     <div class="text-xl font-extrabold text-emerald-300">
                         R$ <span id="moneyBalance">0.00</span>
                     </div>
@@ -227,128 +166,182 @@
             </div>
         </header>
 
-        <!-- BANNER DE CONVERSÃO -->
-        <div class="glass-card-ref rounded-2xl p-4 mb-6 border border-purple-500/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-            <div class="flex items-center space-x-3">
-                <div class="p-3 bg-purple-500/20 rounded-xl text-purple-300">
-                    <i class="fa-solid fa-scale-balanced text-xl"></i>
-                </div>
-                <div>
-                    <h3 class="font-bold text-sm text-white">Taxa de Conversão Oficial</h3>
-                    <p class="text-xs text-white/70">10.000 Pontos = <b>R$ 1,00</b> | Mínimo para saque: <b>R$ 50,00</b></p>
-                </div>
+        <!-- SEÇÃO PERFIL COMPLETO -->
+        <div class="glass-card-ref rounded-2xl p-5 border border-purple-500/40 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+                <span class="bg-amber-500/20 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-500/30">
+                    RECOMPENSA
+                </span>
+                <h4 class="font-bold text-white text-base mt-1">Preencher Perfil Completo</h4>
+                <p class="text-xs text-white/70">Complete seu endereço para liberar resgates.</p>
+                <span class="text-xs text-amber-400 font-bold mt-1 inline-block">+5.000 Pontos (R$ 0,50)</span>
             </div>
-            <button onclick="openWithdrawModal()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-xs uppercase tracking-wider transition shadow-lg">
-                <i class="fa-solid fa-money-bill-transfer mr-1"></i> Sacar PIX
+            <button id="btnProfileMission" onclick="openProfileModal()" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 text-white font-bold rounded-xl text-xs uppercase tracking-wider">
+                Preencher Agora
             </button>
         </div>
 
-        <!-- GRID DE SEÇÕES DE MISSÕES -->
-        <div class="space-y-6">
-
-            <!-- SEÇÃO 1: MISSÃO DISPONÍVEL (PREENCHER PERFIL) -->
+        <!-- SEÇÃO CHECK-IN -->
+        <div class="glass-card-ref rounded-2xl p-5 border border-white/10 mb-6 flex items-center justify-between">
             <div>
-                <h3 class="text-base font-bold text-purple-300 mb-3 flex items-center">
-                    <i class="fa-solid fa-star text-amber-400 mr-2"></i> Missão Principal de Boas-Vindas
-                </h3>
+                <h4 class="font-bold text-white text-sm">Check-in Diário</h4>
+                <p class="text-xs text-white/60">Ganhe pontos diariamente ao entrar.</p>
+            </div>
+            <button onclick="claimCheckin()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase rounded-xl">
+                +1.000 Pts
+            </button>
+        </div>
+    </div>
 
-                <div class="glass-card-ref rounded-2xl p-5 border border-purple-500/40 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div class="flex items-center space-x-4">
-                        <div class="p-4 bg-purple-600/30 border border-purple-400/40 rounded-2xl text-purple-300 text-2xl">
-                            <i class="fa-solid fa-id-card"></i>
-                        </div>
-                        <div>
-                            <span class="bg-amber-500/20 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-500/30">
-                                RECOMPENSA IMEDIATA
-                            </span>
-                            <h4 class="font-bold text-white text-base mt-1">Preencher Perfil Completo</h4>
-                            <p class="text-xs text-white/70">Cadastre a sua Chave PIX e endereço completo para liberar resgates futuros.</p>
-                            <span class="text-xs text-amber-400 font-bold mt-1 inline-block">
-                                <i class="fa-solid fa-coins mr-1"></i> +5.000 Pontos (R$ 0,50)
-                            </span>
-                        </div>
-                    </div>
+    <!-- MODAL PERFIL COM VIA-CEP -->
+    <div id="profileModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card-ref rounded-3xl max-w-lg w-full p-6 border border-purple-500/40 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-white/50 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
 
-                    <button id="btnProfileMission" onclick="openProfileModal()" class="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-lg shrink-0">
-                        Preencher Agora
-                    </button>
-                </div>
+            <h3 class="text-xl font-extrabold text-white text-center mb-3">Preencher Perfil</h3>
+            <div class="bg-emerald-950/50 border border-emerald-500/40 rounded-2xl p-3 mb-4 text-[11px] text-emerald-200">
+                🔒 <strong>Dados 100% Criptografados de Ponta a Ponta</strong>. Não temos acesso direto aos seus dados privados.
             </div>
 
-            <!-- SEÇÃO 2: CHECK-IN DIÁRIO -->
-            <div>
-                <h3 class="text-base font-bold text-purple-300 mb-3 flex items-center">
-                    <i class="fa-solid fa-calendar-check text-blue-400 mr-2"></i> Check-in Diário
-                </h3>
-
-                <div class="glass-card-ref rounded-2xl p-5 border border-white/10 flex items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                        <div class="p-3 bg-blue-500/20 text-blue-400 rounded-xl text-xl">
-                            <i class="fa-solid fa-calendar-day"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white text-sm">Bônus Diário de Acesso</h4>
-                            <p class="text-xs text-white/60">Receba pontos todos os dias apenas por acessar a plataforma.</p>
-                        </div>
-                    </div>
-                    <button id="btnCheckin" onclick="claimCheckin()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase rounded-xl transition">
-                        +1.000 Pts
-                    </button>
-                </div>
-            </div>
-
-            <!-- SEÇÃO 3: BAIXAR APPS & GANHAR (EM BREVE) -->
-            <div>
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-base font-bold text-purple-300 flex items-center">
-                        <i class="fa-solid fa-mobile-screen-button text-emerald-400 mr-2"></i> Baixar Apps & Ganhar
-                    </h3>
-                    <span class="text-[10px] bg-red-500/20 text-red-300 px-2.5 py-0.5 rounded-full border border-red-500/30 uppercase font-bold">
-                        Indisponível
-                    </span>
+            <form onsubmit="submitProfile(event)" class="space-y-3">
+                <input type="text" id="profFullName" required placeholder="Nome Completo" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
+                <input type="text" id="profPix" required placeholder="Chave PIX" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
+                
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="text" id="profCep" required placeholder="CEP (00000-000)" onblur="fetchAddressByCep(this.value)" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
+                    <input type="text" id="profNumber" required placeholder="Nº da Casa" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <i class="fa-brands fa-tiktok text-3xl text-pink-500 mb-2"></i>
-                        <h4 class="font-bold text-white text-sm">Baixar e Criar Conta no TikTok</h4>
-                        <p class="text-[11px] text-white/60 my-1">Instale o app e mantenha-o aberto por 3 minutos.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+50.000 Pontos (R$ 5,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase cursor-not-allowed">Bloqueado</button>
-                    </div>
-
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <i class="fa-solid fa-bolt text-3xl text-amber-400 mb-2"></i>
-                        <h4 class="font-bold text-white text-sm">Instalar Kwai Recompensas</h4>
-                        <p class="text-[11px] text-white/60 my-1">Abra o Kwai e assista a um vídeo do feed inicial.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+40.000 Pontos (R$ 4,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase cursor-not-allowed">Bloqueado</button>
-                    </div>
-
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <i class="fa-solid fa-wallet text-3xl text-sky-400 mb-2"></i>
-                        <h4 class="font-bold text-white text-sm">Baixar Mercado Pago</h4>
-                        <p class="text-[11px] text-white/60 my-1">Abra a carteira digital e conclua o cadastro básico.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+35.000 Pontos (R$ 3,50)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase cursor-not-allowed">Bloqueado</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SEÇÃO 4: AVALIAR APPS & ESTABELECIMENTOS (EM BREVE) -->
-            <div>
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-base font-bold text-purple-300 flex items-center">
-                        <i class="fa-solid fa-star-half-stroke text-amber-400 mr-2"></i> Avaliar & Ganhar
-                    </h3>
-                    <span class="text-[10px] bg-red-500/20 text-red-300 px-2.5 py-0.5 rounded-full border border-red-500/30 uppercase font-bold">
-                        Indisponível
-                    </span>
+                <input type="text" id="profStreet" required placeholder="Rua / Logradouro" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
+                
+                <div class="grid grid-cols-3 gap-2">
+                    <input type="text" id="profNeighborhood" required placeholder="Bairro" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
+                    <input type="text" id="profCity" required placeholder="Cidade" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
+                    <input type="text" id="profState" required placeholder="UF" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font
+                <button type="submit" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl text-xs uppercase mt-2">
+                    Salvar Perfil (+5.000 Pts)
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden bg-slate-900 border border-purple-500/30 text-white px-5 py-3 rounded-full text-xs">
+        <span id="toastMsg"></span>
+    </div>
+
+    <script>
+        let currentUser = null;
+
+        function switchTab(tab) {
+            document.getElementById('loginForm').classList.toggle('hidden', tab !== 'login');
+            document.getElementById('registerForm').classList.toggle('hidden', tab !== 'register');
+            document.getElementById('tabLogin').className = tab === 'login' ? "text-white border-b-2 border-purple-400 pb-2 transition-all" : "text-white/40 hover:text-white/80 pb-2 transition-all";
+            document.getElementById('tabRegister').className = tab === 'register' ? "text-white border-b-2 border-purple-400 pb-2 transition-all" : "text-white/40 hover:text-white/80 pb-2 transition-all";
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('loginUser').value.trim();
+            if (!user) return;
+            
+            currentUser = JSON.parse(localStorage.getItem('biel_user_' + user)) || { username: user, points: 0, profileCompleted: false };
+            localStorage.setItem('biel_active', user);
+            renderDashboard();
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const user = document.getElementById('regUser').value.trim();
+            if (!user) return;
+
+            currentUser = { username: user, points: 0, profileCompleted: false };
+            localStorage.setItem('biel_user_' + user, JSON.stringify(currentUser));
+            localStorage.setItem('biel_active', user);
+            renderDashboard();
+        }
+
+        function renderDashboard() {
+            document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('dashboardScreen').classList.remove('hidden');
+            document.getElementById('displayUsername').innerText = currentUser.username;
+            document.getElementById('userAvatar').innerText = currentUser.username.charAt(0).toUpperCase();
+            document.getElementById('ptsBalance').innerText = currentUser.points.toLocaleString('pt-BR');
+            document.getElementById('moneyBalance').innerText = (currentUser.points / 10000).toFixed(2);
+            
+            if (currentUser.profileCompleted) {
+                const btn = document.getElementById('btnProfileMission');
+                btn.innerText = "Concluído ✓";
+                btn.disabled = true;
+                btn.className = "px-6 py-3 bg-emerald-600/30 text-emerald-300 font-bold rounded-xl text-xs uppercase cursor-not-allowed";
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('biel_active');
+            location.reload();
+        }
+
+        function openProfileModal() { document.getElementById('profileModal').classList.remove('hidden'); }
+        function closeProfileModal() { document.getElementById('profileModal').classList.add('hidden'); }
+
+        async function fetchAddressByCep(cepRaw) {
+            const cep = cepRaw.replace(/\D/g, "");
+            if (cep.length !== 8) return;
+            try {
+                const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                const data = await res.json();
+                if (!data.erro) {
+                    document.getElementById('profStreet').value = data.logradouro || '';
+                    document.getElementById('profNeighborhood').value = data.bairro || '';
+                    document.getElementById('profCity').value = data.localidade || '';
+                    document.getElementById('profState').value = data.uf || '';
+                }
+            } catch (err) {}
+        }
+
+        function submitProfile(e) {
+            e.preventDefault();
+            if (currentUser.profileCompleted) return;
+            currentUser.profileCompleted = true;
+            currentUser.points += 5000;
+            localStorage.setItem('biel_user_' + currentUser.username, JSON.stringify(currentUser));
+            closeProfileModal();
+            renderDashboard();
+            showToast('Perfil Salvo! +5.000 Pontos!');
+        }
+
+        function claimCheckin() {
+            const today = new Date().toDateString();
+            if (currentUser.lastCheckin === today) {
+                showToast('Já resgatado hoje!');
+                return;
+            }
+            currentUser.lastCheckin = today;
+            currentUser.points += 1000;
+            localStorage.setItem('biel_user_' + currentUser.username, JSON.stringify(currentUser));
+            renderDashboard();
+            showToast('+1.000 Pontos creditados!');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+
+        window.onload = () => {
+            const active = localStorage.getItem('biel_active');
+            if (active) {
+                currentUser = JSON.parse(localStorage.getItem('biel_user_' + active));
+                if (currentUser) renderDashboard();
+            }
+        };
+    </script>
+</body>
+    </html>
