@@ -1,232 +1,354 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="h-full">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Uma surpresa para Adriely Raquel ❤️</title>
-<style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;font-family:Arial,Helvetica,sans-serif}
-body{overflow:hidden;background:#090308;color:#fff}
-.screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transform:scale(1.03);transition:.65s}
-.screen.active{opacity:1;pointer-events:auto;transform:scale(1)}
-.bg{position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,70,120,.28),transparent 35%),radial-gradient(circle at 80% 80%,rgba(255,0,80,.25),transparent 35%),linear-gradient(145deg,#160712,#350a20 52%,#080308)}
-.card{position:relative;z-index:2;width:min(92vw,430px);max-height:90vh;overflow:auto;padding:30px 23px;text-align:center;border:1px solid rgba(255,255,255,.2);border-radius:30px;background:rgba(255,255,255,.09);backdrop-filter:blur(15px);box-shadow:0 25px 80px rgba(0,0,0,.45)}
-.small{font-size:13px;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:13px}
-h1{font-size:clamp(29px,8vw,42px);margin:0 0 15px}
-h2{font-size:27px;margin:0 0 17px}
-.text{font-size:17px;line-height:1.65;opacity:.95}
-.photo{width:82px;height:82px;object-fit:cover;border-radius:50%;border:3px solid #fff;display:block;margin:0 auto 17px}
-button{border:0;border-radius:999px;padding:14px 23px;margin:8px 4px 0;font-size:16px;font-weight:bold;cursor:pointer;transition:.25s}
-button:hover{transform:scale(1.06)}
-.primary{background:#fff;color:#b20d45}
-.secondary{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
-.progress{position:fixed;z-index:30;top:14px;left:50%;transform:translateX(-50%);width:130px;height:4px;border-radius:9px;background:rgba(255,255,255,.18);overflow:hidden}
-.progress span{display:block;width:11%;height:100%;background:#fff;transition:.5s}
-.heart{position:fixed;z-index:1;bottom:-40px;pointer-events:none;animation:up linear forwards}
-@keyframes up{to{transform:translateY(-115vh) rotate(360deg);opacity:0}}
-.hidden{display:none!important}
-.final{font-size:20px;line-height:1.65}
-.signature{margin-top:22px;font-size:18px;font-weight:bold}
-#noBtn{position:relative}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biel Crescimento - Plataforma de Missões</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Montserrat & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * { font-family: 'Montserrat', sans-serif; }
+
+        body {
+            background: radial-gradient(circle at 50% 20%, #4a152d 0%, #201335 40%, #100f24 70%, #080811 100%);
+            min-height: 100vh;
+            color: #f8fafc;
+        }
+
+        .shimmer-text {
+            background: linear-gradient(90deg, #ffffff 0%, #f472b6 25%, #ffffff 50%, #a78bfa 75%, #ffffff 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 3.5s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(244, 114, 182, 0.3));
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .glass-card-ref {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .line-input {
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            background: transparent;
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+        .line-input:focus {
+            outline: none;
+            border-bottom-color: #a78bfa;
+            box-shadow: 0 2px 10px -2px rgba(167, 139, 250, 0.5);
+        }
+
+        .btn-gradient-ref {
+            background: linear-gradient(90deg, #381b59 0%, #29408b 50%, #4069c9 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(41, 64, 139, 0.4);
+        }
+        .btn-gradient-ref:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+            box-shadow: 0 12px 30px rgba(64, 105, 201, 0.6);
+        }
+        
+        .custom-checkbox {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 3px;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+        }
+        .custom-checkbox:checked {
+            background: #a78bfa;
+            border-color: #a78bfa;
+        }
+        .custom-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            top: -2px;
+            left: 2px;
+        }
+
+        @keyframes fadeInToast {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .toast-show { animation: fadeInToast 0.3s forwards; }
+
+        .disabled-card {
+            opacity: 0.65;
+            filter: grayscale(0.3);
+            cursor: not-allowed;
+        }
+    </style>
 </head>
-<body>
+<body class="min-h-screen relative p-4 flex flex-col justify-between">
 
-<div class="progress"><span id="bar"></span></div>
+    <canvas id="particleCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
-<!-- 1 -->
-<section class="screen active" id="s1"><div class="bg"></div><div class="card">
-<div class="small">Uma pequena surpresa</div>
-<h1>Oi, Adriely ❤️</h1>
-<p class="text">Antes de você continuar, eu só quero que saiba que eu fiz isso pensando em você.</p>
-<button class="primary" onclick="next()">Começar</button>
-</div></section>
+    <!-- TELA DE LOGIN / CADASTRO -->
+    <div id="authScreen" class="relative z-10 w-full max-w-[400px] mx-auto my-auto">
+        <div class="glass-card-ref rounded-[35px] px-8 py-9 shadow-2xl relative">
+            <header class="text-center mb-6">
+                <h1 class="text-2xl sm:text-3xl font-extrabold tracking-wide shimmer-text select-none">
+                    Biel crescimento
+                </h1>
+                <p class="text-[11px] text-white/60 mt-1">Plataforma Oficial de Recompensas</p>
+            </header>
 
-<!-- 2 -->
-<section class="screen" id="s2"><div class="bg"></div><div class="card">
-<div class="small">Antes de tudo...</div>
-<h2>Eu queria te dizer uma coisa ❤️</h2>
-<p class="text">Eu poderia simplesmente te mandar uma mensagem, mas achei que você merecia algo diferente. Então fiz isso pensando em cada detalhe.</p>
-<button class="primary" onclick="next()">Continuar ❤️</button>
-</div></section>
+            <div class="flex justify-center space-x-6 mb-7 text-xs font-semibold tracking-wider uppercase border-b border-white/10 pb-2">
+                <button id="tabLogin" onclick="switchTab('login')" class="text-white border-b-2 border-purple-400 pb-2 transition-all">
+                    Entrar
+                </button>
+                <button id="tabRegister" onclick="switchTab('register')" class="text-white/40 hover:text-white/80 pb-2 transition-all">
+                    Cadastrar
+                </button>
+            </div>
 
-<!-- 3 -->
-<section class="screen" id="s3"><div class="bg"></div><div class="card">
-<div class="small">Talvez você nem imagine</div>
-<h2>O quanto você é importante</h2>
-<p class="text">Às vezes eu fico pensando em como uma pessoa consegue ocupar tanto espaço nos pensamentos da gente. E, de alguma forma, você conseguiu.</p>
-<button class="primary" onclick="next()">Continuar</button>
-</div></section>
+            <!-- FORM LOGIN -->
+            <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-6">
+                <div class="relative flex items-center">
+                    <i class="fa-regular fa-envelope text-white/80 text-sm w-6"></i>
+                    <input type="text" id="loginUser" required placeholder="E-mail ou Usuário"
+                        class="line-input w-full pl-3 pr-2 py-2 text-sm text-white placeholder-white/60">
+                </div>
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-lock text-white/80 text-sm w-6"></i>
+                    <input type="password" id="loginPass" required placeholder="Senha"
+                        class="line-input w-full pl-3 pr-8 py-2 text-sm text-white placeholder-white/60">
+                    <button type="button" onclick="togglePass('loginPass', 'eyeLogin')" class="absolute right-1 text-white/50 hover:text-white">
+                        <i id="eyeLogin" class="fa-regular fa-eye text-xs"></i>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-white/70 pt-1">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span>Lembrar de mim</span>
+                    </label>
+                    <a href="#" onclick="showToast('Link enviado para seu e-mail!')" class="hover:text-white">Esqueceu a senha?</a>
+                </div>
+                <button type="submit" class="btn-gradient-ref w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-widest text-white mt-4">
+                    LOGIN
+                </button>
+            </form>
 
-<!-- 4 -->
-<section class="screen" id="s4"><div class="bg"></div><div class="card">
-<div class="small">Uma lembrança</div>
-<h2>Eu gosto dos nossos momentos 😌</h2>
-<p class="text">Gosto das conversas, das brincadeiras, das risadas e até daqueles momentos simples que talvez pareçam bobos, mas que acabam ficando na memória.</p>
-<button class="primary" onclick="next()">Mais uma ❤️</button>
-</div></section>
+            <!-- FORM CADASTRO -->
+            <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-4 hidden">
+                <div class="relative flex items-center">
+                    <i class="fa-regular fa-user text-white/80 text-sm w-6"></i>
+                    <input type="text" id="regUser" required placeholder="Nome de Usuário"
+                        class="line-input w-full pl-3 pr-2 py-1.5 text-sm text-white placeholder-white/60">
+                </div>
+                <div class="relative flex items-center">
+                    <i class="fa-regular fa-envelope text-white/80 text-sm w-6"></i>
+                    <input type="email" id="regEmail" required placeholder="E-mail"
+                        class="line-input w-full pl-3 pr-2 py-1.5 text-sm text-white placeholder-white/60">
+                </div>
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-phone text-white/80 text-sm w-6"></i>
+                    <input type="tel" id="regPhone" required placeholder="Número de Telefone" oninput="formatPhone(this)" maxlength="15"
+                        class="line-input w-full pl-3 pr-2 py-1.5 text-sm text-white placeholder-white/60">
+                </div>
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-lock text-white/80 text-sm w-6"></i>
+                    <input type="password" id="regPass" required placeholder="Senha"
+                        class="line-input w-full pl-3 pr-8 py-1.5 text-sm text-white placeholder-white/60">
+                    <button type="button" onclick="togglePass('regPass', 'eyeReg')" class="absolute right-1 text-white/50 hover:text-white">
+                        <i id="eyeReg" class="fa-regular fa-eye text-xs"></i>
+                    </button>
+                </div>
+                <button type="submit" class="btn-gradient-ref w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-widest text-white mt-5">
+                    CADASTRAR E ENTRAR
+                </button>
+            </form>
+        </div>
+    </div>
 
-<!-- 5 -->
-<section class="screen" id="s5"><div class="bg"></div><div class="card">
-<div class="small">Sendo sincero...</div>
-<h2>Você mexe comigo</h2>
-<p class="text">Tem alguma coisa em você que me faz querer estar perto, conversar mais, saber como foi seu dia e compartilhar um pouco mais da minha vida com você.</p>
-<button class="primary" onclick="next()">Continuar</button>
-</div></section>
+    <!-- TELA DASHBOARD (PAINEL DE MISSÕES) -->
+    <div id="dashboardScreen" class="relative z-10 w-full max-w-5xl mx-auto hidden py-4 pb-20">
+        
+        <!-- HEADER DASHBOARD -->
+        <header class="flex flex-col md:flex-row md:items-center justify-between glass-card-ref rounded-2xl p-4 md:p-6 mb-6 gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center font-bold text-xl border-2 border-white/30">
+                    <span id="userAvatar">B</span>
+                </div>
+                <div>
+                    <h2 class="font-extrabold text-lg text-white" id="displayUsername">Usuário</h2>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                        <i class="fa-solid fa-circle text-[6px] mr-1 text-emerald-400"></i> Conta Verificada
+                    </span>
+                </div>
+            </div>
 
-<!-- 6 -->
-<section class="screen" id="s6"><div class="bg"></div><div class="card">
-<div class="small">Não é só por hoje</div>
-<h2>Eu quero construir algo ❤️</h2>
-<p class="text">Não estou fazendo isso por impulso. Eu pensei bastante antes de preparar tudo, porque queria encontrar uma forma especial de falar o que sinto.</p>
-<button class="primary" onclick="next()">Continuar</button>
-</div></section>
+            <!-- CARTÕES DE SALDO -->
+            <div class="flex items-center space-x-3">
+                <div class="bg-slate-900/60 border border-purple-500/30 px-4 py-2 rounded-xl text-right flex-1 md:flex-none">
+                    <span class="text-[10px] uppercase font-bold text-purple-300 block">Pontos Recompensa</span>
+                    <div class="text-xl font-extrabold text-purple-200 flex items-center justify-end space-x-1">
+                        <i class="fa-solid fa-coins text-amber-400 text-sm"></i>
+                        <span id="ptsBalance">0</span>
+                    </div>
+                </div>
 
-<!-- 7 -->
-<section class="screen" id="s7"><div class="bg"></div><div class="card">
-<div class="small">De verdade...</div>
-<h2>Eu quero você na minha vida</h2>
-<p class="text">Quero ter você por perto nos dias bons, nos dias difíceis, nas conversas sem assunto e nas pequenas coisas que fazem a vida ficar melhor.</p>
-<button class="primary" onclick="next()">Ainda tem mais 😭❤️</button>
-</div></section>
+                <div class="bg-slate-900/60 border border-emerald-500/30 px-4 py-2 rounded-xl text-right flex-1 md:flex-none">
+                    <span class="text-[10px] uppercase font-bold text-emerald-400 block">Saldo em Reais</span>
+                    <div class="text-xl font-extrabold text-emerald-300">
+                        R$ <span id="moneyBalance">0.00</span>
+                    </div>
+                </div>
 
-<!-- 8 -->
-<section class="screen" id="s8"><div class="bg"></div><div class="card">
-<div class="small">E eu ainda não terminei</div>
-<h2>Porque você merece saber...</h2>
-<p class="text">Que tudo isso foi preparado com carinho. Cada tela que você está vendo existe porque eu queria transformar algumas palavras em um momento que você pudesse guardar.</p>
-<button class="primary" onclick="next()">Continuar ❤️</button>
-</div></section>
+                <button onclick="handleLogout()" title="Sair" class="p-3 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-xl transition border border-red-500/30">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </header>
 
-<!-- 9 -->
-<section class="screen" id="s9"><div class="bg"></div><div class="card">
-<div class="small">Só mais uma coisa...</div>
-<h2>Eu escolhi você</h2>
-<p class="text">Entre tantas pessoas, é você quem eu quero conhecer cada vez mais. É você com quem eu quero viver novos momentos e criar novas lembranças.</p>
-<button class="primary" onclick="next()">Agora falta pouco...</button>
-</div></section>
+        <!-- BANNER DE CONVERSÃO -->
+        <div class="glass-card-ref rounded-2xl p-4 mb-6 border border-purple-500/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div class="flex items-center space-x-3">
+                <div class="p-3 bg-purple-500/20 rounded-xl text-purple-300">
+                    <i class="fa-solid fa-scale-balanced text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-sm text-white">Taxa de Conversão Oficial</h3>
+                    <p class="text-xs text-white/70">10.000 Pontos = <b>R$ 1,00</b> | Mínimo para saque: <b>R$ 50,00</b></p>
+                </div>
+            </div>
+            <button onclick="openWithdrawModal()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-xs uppercase tracking-wider transition shadow-lg">
+                <i class="fa-solid fa-money-bill-transfer mr-1"></i> Sacar PIX
+            </button>
+        </div>
 
-<!-- 10 -->
-<section class="screen" id="s10"><div class="bg"></div><div class="card">
-<div class="small">Respira comigo 😂❤️</div>
-<h2>Chegando perto...</h2>
-<p class="text">Eu sei que já tem bastante coisa escrita aqui, mas eu precisava fazer assim. Queria que você sentisse que não foi só uma pergunta qualquer.</p>
-<button class="primary" onclick="next()">Continuar</button>
-</div></section>
+        <!-- GRID DE SEÇÕES DE MISSÕES -->
+        <div class="space-y-6">
 
-<!-- 11 -->
-<section class="screen" id="s11"><div class="bg"></div><div class="card">
-<div class="small">Agora falando sério</div>
-<h2>Eu gosto de você. Muito.</h2>
-<p class="text">E talvez eu não consiga colocar tudo o que sinto em palavras, mas espero que você consiga perceber a intenção por trás de cada uma delas.</p>
-<button class="primary" onclick="next()">Mais uma ❤️</button>
-</div></section>
+            <!-- SEÇÃO 1: MISSÃO DISPONÍVEL (PREENCHER PERFIL) -->
+            <div>
+                <h3 class="text-base font-bold text-purple-300 mb-3 flex items-center">
+                    <i class="fa-solid fa-star text-amber-400 mr-2"></i> Missão Principal de Boas-Vindas
+                </h3>
 
-<!-- 12 -->
-<section class="screen" id="s12"><div class="bg"></div><div class="card">
-<div class="small">Quase lá...</div>
-<h2>Imagina nós dois daqui pra frente</h2>
-<p class="text">Mais conversas, mais risadas, mais histórias, mais momentos juntos e, principalmente, a chance de descobrir até onde essa história pode chegar.</p>
-<button class="primary" onclick="next()">Continuar 😭</button>
-</div></section>
+                <div class="glass-card-ref rounded-2xl p-5 border border-purple-500/40 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="p-4 bg-purple-600/30 border border-purple-400/40 rounded-2xl text-purple-300 text-2xl">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+                        <div>
+                            <span class="bg-amber-500/20 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-500/30">
+                                RECOMPENSA IMEDIATA
+                            </span>
+                            <h4 class="font-bold text-white text-base mt-1">Preencher Perfil Completo</h4>
+                            <p class="text-xs text-white/70">Cadastre a sua Chave PIX e endereço completo para liberar resgates futuros.</p>
+                            <span class="text-xs text-amber-400 font-bold mt-1 inline-block">
+                                <i class="fa-solid fa-coins mr-1"></i> +5.000 Pontos (R$ 0,50)
+                            </span>
+                        </div>
+                    </div>
 
-<!-- 13 -->
-<section class="screen" id="s13"><div class="bg"></div><div class="card">
-<div class="small">Última mensagem antes da pergunta</div>
-<h2>Eu espero que você sorria ❤️</h2>
-<p class="text">Porque enquanto você lê tudo isso, eu só consigo imaginar sua reação. E espero de verdade que esse momento fique marcado de uma forma boa pra você.</p>
-<button class="primary" onclick="next()">Agora sim...</button>
-</div></section>
+                    <button id="btnProfileMission" onclick="openProfileModal()" class="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-lg shrink-0">
+                        Preencher Agora
+                    </button>
+                </div>
+            </div>
 
-<!-- 14 -->
-<section class="screen" id="s14"><div class="bg"></div><div class="card">
-<div class="small">Chegou a hora</div>
-<h2>Adriely Raquel...</h2>
-<p class="text">Depois de tantas mensagens, tantos pensamentos e tanto suspense, finalmente chegou a parte que eu estava esperando desde o começo.</p>
-<button class="primary" onclick="next()">Pode perguntar ❤️</button>
-</div></section>
+            <!-- SEÇÃO 2: CHECK-IN DIÁRIO -->
+            <div>
+                <h3 class="text-base font-bold text-purple-300 mb-3 flex items-center">
+                    <i class="fa-solid fa-calendar-check text-blue-400 mr-2"></i> Check-in Diário
+                </h3>
 
-<!-- 9 -->
-<section class="screen" id="s15"><div class="bg"></div><div class="card">
-<div class="small">Biel → Adriely</div>
-<h2>Chegou a hora...</h2>
-<p class="final"><b>Adriely Raquel,</b><br><br>você aceita namorar comigo?</p>
-<div>
-<button class="primary" onclick="yes()">SIM ❤️</button>
-<button class="secondary" id="noBtn" onclick="runNo()">NÃO 😭</button>
-</div>
-<div id="result" class="hidden">
-<p class="final"><br><b>EU SABIA! 😭❤️</b><br><br>Agora começa uma nova parte da nossa história.</p>
-<div class="signature">Com carinho,<br>Biel ❤️</div>
-<button class="primary" onclick="shareWhatsApp()">Compartilhar no WhatsApp 💚</button>
-</div>
-</div></section>
+                <div class="glass-card-ref rounded-2xl p-5 border border-white/10 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-3 bg-blue-500/20 text-blue-400 rounded-xl text-xl">
+                            <i class="fa-solid fa-calendar-day"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Bônus Diário de Acesso</h4>
+                            <p class="text-xs text-white/60">Receba pontos todos os dias apenas por acessar a plataforma.</p>
+                        </div>
+                    </div>
+                    <button id="btnCheckin" onclick="claimCheckin()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase rounded-xl transition">
+                        +1.000 Pts
+                    </button>
+                </div>
+            </div>
 
-<script>
-let current=1;
-const total=15;
+            <!-- SEÇÃO 3: BAIXAR APPS & GANHAR (EM BREVE) -->
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-base font-bold text-purple-300 flex items-center">
+                        <i class="fa-solid fa-mobile-screen-button text-emerald-400 mr-2"></i> Baixar Apps & Ganhar
+                    </h3>
+                    <span class="text-[10px] bg-red-500/20 text-red-300 px-2.5 py-0.5 rounded-full border border-red-500/30 uppercase font-bold">
+                        Indisponível
+                    </span>
+                </div>
 
-// Cada tela fica visível por 2 minutos antes de avançar automaticamente.
-let autoAdvanceTimer = null;
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
+                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
+                        <i class="fa-brands fa-tiktok text-3xl text-pink-500 mb-2"></i>
+                        <h4 class="font-bold text-white text-sm">Baixar e Criar Conta no TikTok</h4>
+                        <p class="text-[11px] text-white/60 my-1">Instale o app e mantenha-o aberto por 3 minutos.</p>
+                        <div class="text-xs font-extrabold text-amber-400 mb-3">+50.000 Pontos (R$ 5,00)</div>
+                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase cursor-not-allowed">Bloqueado</button>
+                    </div>
 
-function updateBar(){
- document.getElementById("bar").style.width=(current/total*100)+"%";
-}
+                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
+                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
+                        <i class="fa-solid fa-bolt text-3xl text-amber-400 mb-2"></i>
+                        <h4 class="font-bold text-white text-sm">Instalar Kwai Recompensas</h4>
+                        <p class="text-[11px] text-white/60 my-1">Abra o Kwai e assista a um vídeo do feed inicial.</p>
+                        <div class="text-xs font-extrabold text-amber-400 mb-3">+40.000 Pontos (R$ 4,00)</div>
+                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase cursor-not-allowed">Bloqueado</button>
+                    </div>
 
-function startAutoAdvance(){
- clearTimeout(autoAdvanceTimer);
- if(current < total){
-  autoAdvanceTimer = setTimeout(()=>{
-   next();
-  }, 120000);
- }
-}
+                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
+                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
+                        <i class="fa-solid fa-wallet text-3xl text-sky-400 mb-2"></i>
+                        <h4 class="font-bold text-white text-sm">Baixar Mercado Pago</h4>
+                        <p class="text-[11px] text-white/60 my-1">Abra a carteira digital e conclua o cadastro básico.</p>
+                        <div class="text-xs font-extrabold text-amber-400 mb-3">+35.000 Pontos (R$ 3,50)</div>
+                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase cursor-not-allowed">Bloqueado</button>
+                    </div>
+                </div>
+            </div>
 
-function next(){
- clearTimeout(autoAdvanceTimer);
- if(current >= total) return;
- document.getElementById("s"+current).classList.remove("active");
- current++;
- document.getElementById("s"+current).classList.add("active");
- updateBar();
- startAutoAdvance();
-}
+            <!-- SEÇÃO 4: AVALIAR APPS & ESTABELECIMENTOS (EM BREVE) -->
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-base font-bold text-purple-300 flex items-center">
+                        <i class="fa-solid fa-star-half-stroke text-amber-400 mr-2"></i> Avaliar & Ganhar
+                    </h3>
+                    <span class="text-[10px] bg-red-500/20 text-red-300 px-2.5 py-0.5 rounded-full border border-red-500/30 uppercase font-bold">
+                        Indisponível
+                    </span>
+                </div>
 
-function yes(){
- document.getElementById("result").classList.remove("hidden");
- document.getElementById("noBtn").style.display="none";
- document.querySelector("#s15 h2").innerHTML="Ela disse SIM! ❤️";
- for(let i=0;i<45;i++) setTimeout(createHeart,i*55);
-}
-
-function runNo(){
- const b=document.getElementById("noBtn");
- b.style.position="fixed";
- b.style.left=Math.max(10,Math.random()*(innerWidth-b.offsetWidth-20))+"px";
- b.style.top=Math.max(10,Math.random()*(innerHeight-b.offsetHeight-20))+"px";
-}
-
-function shareWhatsApp(){
- const text="Adriely Raquel ❤️ O Biel acabou de fazer uma pergunta muito importante... e você disse SIM! 😭❤️";
- const url="https://wa.me/?text="+encodeURIComponent(text);
- window.open(url,"_blank");
-}
-
-function createHeart(){
- const h=document.createElement("div");
- h.className="heart";
- h.textContent=["❤️","💗","💖","💕","💘"][Math.floor(Math.random()*5)];
- h.style.left=Math.random()*100+"vw";
- h.style.fontSize=(15+Math.random()*24)+"px";
- h.style.animationDuration=(3+Math.random()*4)+"s";
- document.body.appendChild(h);
- setTimeout(()=>h.remove(),7000);
-}
-
-setInterval(createHeart,750);
-updateBar();
-startAutoAdvance();
-</script>
-</body>
-</html>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
+                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font
