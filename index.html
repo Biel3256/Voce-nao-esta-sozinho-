@@ -55,6 +55,12 @@
         }
         .btn-gradient-ref:hover { opacity: 0.95; transform: translateY(-1px); }
         .disabled-card { opacity: 0.65; filter: grayscale(0.3); cursor: not-allowed; }
+        
+        /* Acordeão de FAQ e Termos */
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .faq-item.active .faq-content { max-height: 200px; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        .faq-icon { transition: transform 0.3s ease; }
     </style>
 </head>
 <body class="min-h-screen relative p-4 flex flex-col justify-between">
@@ -114,10 +120,23 @@
                     <input type="password" id="regPass" required placeholder="Senha"
                         class="line-input w-full pl-3 pr-8 py-1.5 text-sm text-white placeholder-white/60">
                 </div>
-                <button type="submit" class="btn-gradient-ref w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-widest text-white mt-5">
+                
+                <!-- ACEITE DOS TERMOS NO CADASTRO -->
+                <div class="flex items-start space-x-2 pt-1">
+                    <input type="checkbox" id="termsCheck" required class="custom-checkbox mt-0.5">
+                    <label for="termsCheck" class="text-[10px] text-white/70 leading-tight">
+                        Concordo com os <span onclick="openTermsModal()" class="text-purple-400 underline cursor-pointer">Termos de Uso</span> e Políticas de Privacidade.
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-gradient-ref w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-widest text-white mt-3">
                     CADASTRAR E ENTRAR
                 </button>
             </form>
+            
+            <div class="mt-4 text-center">
+                <button onclick="openTermsModal()" class="text-[10px] text-white/50 hover:text-white/80 underline">Ler Termos de Uso</button>
+            </div>
         </div>
     </div>
 
@@ -288,323 +307,4 @@
                         <i class="fa-solid fa-hotel text-3xl text-cyan-400 mb-2"></i>
                         <h4 class="font-bold text-white text-sm">Avaliar Pousada Parceira</h4>
                         <p class="text-[11px] text-white/60 my-1">Escreva breve avaliação no Google Meu Negócio.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+20.000 Pontos (R$ 2,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5. ANÚNCIOS VIP (EM BREVE) -->
-            <div>
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-base font-bold text-purple-300 flex items-center">
-                        <i class="fa-solid fa-play-circle text-pink-400 mr-2"></i> Assistir Anúncios VIP
-                    </h3>
-                    <span class="text-[10px] bg-red-500/20 text-red-300 px-2.5 py-0.5 rounded-full border border-red-500/30 uppercase font-bold">Indisponível</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <div class="p-3 bg-pink-500/20 text-pink-400 rounded-xl w-fit mb-3"><i class="fa-solid fa-rectangle-ad text-xl"></i></div>
-                        <h4 class="font-bold text-white text-sm">Super Anúncio Patrocinado #1</h4>
-                        <p class="text-[11px] text-white/60 my-2">Assista ao vídeo promocional de 60s até o fim.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+50.000 Pontos (R$ 5,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <div class="p-3 bg-purple-500/20 text-purple-400 rounded-xl w-fit mb-3"><i class="fa-solid fa-film text-xl"></i></div>
-                        <h4 class="font-bold text-white text-sm">Anúncio de Alta Recompensa #2</h4>
-                        <p class="text-[11px] text-white/60 my-2">Assista ao trailer parceiro sem pular.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+80.000 Pontos (R$ 8,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl w-fit mb-3"><i class="fa-solid fa-crown text-xl"></i></div>
-                        <h4 class="font-bold text-white text-sm">Mega Vídeo Recompensado #3</h4>
-                        <p class="text-[11px] text-white/60 my-2">Assista à apresentação especial de produtos.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+100.000 Pontos (R$ 10,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 6. JOGAR PARA GANHAR (EM BREVE) -->
-            <div>
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-base font-bold text-purple-300 flex items-center">
-                        <i class="fa-solid fa-gamepad text-indigo-400 mr-2"></i> Jogar para Ganhar
-                    </h3>
-                    <span class="text-[10px] bg-red-500/20 text-red-300 px-2.5 py-0.5 rounded-full border border-red-500/30 uppercase font-bold">Indisponível</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10">
-                        <div class="p-3 bg-indigo-500/20 text-indigo-400 rounded-xl w-fit mb-2"><i class="fa-solid fa-ghost text-xl"></i></div>
-                        <h4 class="font-bold text-white text-sm">Jogo da Cobrinha Arcade</h4>
-                        <p class="text-[11px] text-white/60 my-1">Faça 500 pontos no jogo clássico.</p>
-                        <span class="text-xs text-amber-400 font-bold block mb-3">+25.000 Pontos</span>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Em Breve</button>
-                    </div>
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10">
-                        <div class="p-3 bg-amber-500/20 text-amber-400 rounded-xl w-fit mb-2"><i class="fa-solid fa-arrows-spin text-xl"></i></div>
-                        <h4 class="font-bold text-white text-sm">Roleta da Sorte Diária</h4>
-                        <p class="text-[11px] text-white/60 my-1">Gire a roleta e ganhe prêmios em pontos.</p>
-                        <span class="text-xs text-amber-400 font-bold block mb-3">Até 200.000 Pontos</span>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Em Breve</button>
-                    </div>
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10">
-                        <div class="p-3 bg-cyan-500/20 text-cyan-400 rounded-xl w-fit mb-2"><i class="fa-solid fa-gem text-xl"></i></div>
-                        <h4 class="font-bold text-white text-sm">Mineração de Pontos</h4>
-                        <p class="text-[11px] text-white/60 my-1">Deixe o mini-game ativo acumulando tokens.</p>
-                        <span class="text-xs text-amber-400 font-bold block mb-3">+1.000 Pts / min</span>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Em Breve</button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- RODAPÉ COM SUPORTE TELEGRAM -->
-        <footer class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 gap-4">
-            <div>© Biel Crescimento - Todos os direitos reservados.</div>
-            <button onclick="showToast('Suporte Telegram temporariamente indisponível (Em Breve)')" class="flex items-center space-x-2 bg-sky-500/20 hover:bg-sky-500/30 border border-sky-500/30 text-sky-300 px-4 py-2 rounded-xl transition">
-                <i class="fa-brands fa-telegram text-base"></i>
-                <span class="font-bold">Suporte Telegram (Em Breve)</span>
-                <span class="text-[9px] bg-red-500/20 text-red-300 px-1.5 py-0.5 rounded border border-red-500/30 font-bold">OFFLINE</span>
-            </button>
-        </footer>
-    </div>
-
-    <!-- WIDGET FLUTUANTE DE SUPORTE CHAT -->
-    <div class="fixed bottom-6 right-6 z-40">
-        <button onclick="openChatSupportModal()" class="relative bg-gradient-to-tr from-purple-600 to-indigo-600 hover:scale-105 transition transform text-white p-4 rounded-full shadow-2xl border-2 border-white/20 flex items-center justify-center">
-            <i class="fa-solid fa-comments text-xl"></i>
-            <span class="absolute -top-1 -right-1 flex h-4 w-4">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-4 w-4 bg-pink-500"></span>
-            </span>
-        </button>
-    </div>
-
-    <!-- MODAL DE PREENCHER PERFIL COMPLETO -->
-    <div id="profileModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-card-ref rounded-3xl max-w-lg w-full p-6 border border-purple-500/40 relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-white/50 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-
-            <div class="text-center mb-4">
-                <div class="w-12 h-12 bg-purple-500/20 text-purple-300 rounded-2xl flex items-center justify-center mx-auto mb-2 text-xl"><i class="fa-solid fa-user-gear"></i></div>
-                <h3 class="text-xl font-extrabold text-white">Preencher Dados do Perfil</h3>
-                <p class="text-xs text-white/70 mt-1">Complete seus dados para resgatar <b>5.000 Pontos</b> instantaneamente!</p>
-            </div>
-
-            <div class="bg-emerald-950/50 border border-emerald-500/40 rounded-2xl p-3 mb-5 flex items-start space-x-3">
-                <i class="fa-solid fa-shield-halved text-emerald-400 text-lg mt-0.5"></i>
-                <div class="text-[11px] text-emerald-200">
-                    <strong class="font-bold text-emerald-300 block mb-0.5">Dados 100% Criptografados de Ponta a Ponta 🔒</strong>
-                    Suas informações pessoais são totalmente confidenciais e mantidas em sigilo absoluto. Não temos acesso direto aos seus dados privados.
-                </div>
-            </div>
-
-            <form onsubmit="submitProfile(event)" class="space-y-3 text-left">
-                <input type="text" id="profFullName" required placeholder="Nome Completo" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
-                <input type="text" id="profPix" required placeholder="Chave PIX (CPF, E-mail ou Telefone)" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
-                <div class="grid grid-cols-2 gap-2">
-                    <input type="text" id="profCep" maxlength="9" required placeholder="CEP (00000-000)" onblur="fetchAddressByCep(this.value)" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
-                    <input type="text" id="profNumber" required placeholder="Número da Casa" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
-                </div>
-                <input type="text" id="profStreet" required placeholder="Rua / Logradouro" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
-                <div class="grid grid-cols-3 gap-2">
-                    <input type="text" id="profNeighborhood" required placeholder="Bairro" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
-                    <input type="text" id="profCity" required placeholder="Cidade" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white">
-                    <input type="text" id="profState" required placeholder="UF" maxlength="2" class="w-full bg-slate-900 border border-white/20 rounded-xl p-2.5 text-xs text-white uppercase">
-                </div>
-                <button type="submit" class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl text-xs uppercase mt-3">
-                    Salvar Perfil e Resgatar +5.000 Pts
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL DE SAQUE PIX -->
-    <div id="withdrawModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-card-ref rounded-3xl max-w-sm w-full p-6 border border-emerald-500/40 relative text-center">
-            <button onclick="closeWithdrawModal()" class="absolute top-4 right-4 text-white/50 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto mb-3 text-xl"><i class="fa-solid fa-money-bill-transfer"></i></div>
-            <h3 class="text-xl font-extrabold text-white">Solicitar Saque PIX</h3>
-            <p class="text-xs text-white/70 mt-1">Valor mínimo para transferência: <b>R$ 50,00</b></p>
-            <div class="my-5 bg-slate-900/80 p-4 rounded-2xl border border-white/10">
-                <div class="text-[11px] text-white/60 mb-1">Seu Saldo Atual:</div>
-                <div class="text-2xl font-black text-emerald-400">R$ <span id="modalCurrentMoney">0.00</span></div>
-            </div>
-            <div id="withdrawErrorMsg" class="text-xs text-red-400 bg-red-500/10 border border-red-500/30 p-3 rounded-xl mb-4 hidden">
-                Você ainda não atingiu o limite mínimo de R$ 50,00. Continue realizando missões!
-            </div>
-            <button onclick="attemptWithdraw()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase">
-                Confirmar Saque
-            </button>
-        </div>
-    </div>
-
-    <!-- MODAL CHAT DE SUPORTE -->
-    <div id="chatSupportModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-card-ref rounded-3xl max-w-sm w-full p-6 border border-purple-500/40 relative text-center">
-            <button onclick="closeChatSupportModal()" class="absolute top-4 right-4 text-white/50 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <div class="w-12 h-12 bg-purple-500/20 text-purple-300 rounded-2xl flex items-center justify-center mx-auto mb-3 text-xl"><i class="fa-solid fa-headset"></i></div>
-            <h3 class="text-lg font-extrabold text-white">Suporte via Chat ao Vivo</h3>
-            <span class="inline-block my-2 text-[10px] bg-red-500/20 text-red-300 px-3 py-1 rounded-full border border-red-500/30 font-bold uppercase">Disponível em Breve</span>
-            <p class="text-xs text-white/70 my-3">Nossa equipe de atendimento via chat estará disponível na próxima atualização.</p>
-            <button onclick="closeChatSupportModal()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl text-xs uppercase">Entendido</button>
-        </div>
-    </div>
-
-    <!-- TOAST -->
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden bg-slate-900 border border-purple-500/30 text-white px-5 py-3 rounded-full text-xs">
-        <span id="toastMsg"></span>
-    </div>
-
-    <!-- SCRIPT CORRIGIDO E FUNCIONAL -->
-    <script>
-        let currentUser = null;
-
-        function switchTab(tab) {
-            document.getElementById('loginForm').classList.toggle('hidden', tab !== 'login');
-            document.getElementById('registerForm').classList.toggle('hidden', tab !== 'register');
-            document.getElementById('tabLogin').className = tab === 'login' ? "text-white border-b-2 border-purple-400 pb-2 transition-all" : "text-white/40 hover:text-white/80 pb-2 transition-all";
-            document.getElementById('tabRegister').className = tab === 'register' ? "text-white border-b-2 border-purple-400 pb-2 transition-all" : "text-white/40 hover:text-white/80 pb-2 transition-all";
-        }
-
-        function handleLogin(e) {
-            e.preventDefault();
-            const user = document.getElementById('loginUser').value.trim();
-            if (!user) return;
-            
-            const savedData = localStorage.getItem('biel_user_' + user);
-            if (savedData) {
-                currentUser = JSON.parse(savedData);
-            } else {
-                currentUser = { username: user, points: 0, profileCompleted: false };
-                localStorage.setItem('biel_user_' + user, JSON.stringify(currentUser));
-            }
-            localStorage.setItem('biel_active', user);
-            renderDashboard();
-            showToast('Login realizado com sucesso!');
-        }
-
-        function handleRegister(e) {
-            e.preventDefault();
-            const user = document.getElementById('regUser').value.trim();
-            if (!user) return;
-            
-            currentUser = { username: user, points: 0, profileCompleted: false };
-            localStorage.setItem('biel_user_' + user, JSON.stringify(currentUser));
-            localStorage.setItem('biel_active', user);
-            renderDashboard();
-            showToast('Conta criada com sucesso!');
-        }
-
-        function renderDashboard() {
-            document.getElementById('authScreen').classList.add('hidden');
-            document.getElementById('dashboardScreen').classList.remove('hidden');
-            document.getElementById('displayUsername').innerText = currentUser.username;
-            document.getElementById('userAvatar').innerText = currentUser.username.charAt(0).toUpperCase();
-            document.getElementById('ptsBalance').innerText = currentUser.points.toLocaleString('pt-BR');
-            const money = (currentUser.points / 10000).toFixed(2);
-            document.getElementById('moneyBalance').innerText = money;
-            document.getElementById('modalCurrentMoney').innerText = money;
-            
-            if (currentUser.profileCompleted) {
-                const btn = document.getElementById('btnProfileMission');
-                btn.innerText = "Perfil Concluído ✓";
-                btn.disabled = true;
-                btn.className = "w-full md:w-auto px-6 py-3 bg-emerald-600/30 text-emerald-300 font-bold rounded-xl text-xs uppercase cursor-not-allowed";
-            }
-        }
-
-        function handleLogout() {
-            localStorage.removeItem('biel_active');
-            location.reload();
-        }
-
-        function openProfileModal() { document.getElementById('profileModal').classList.remove('hidden'); }
-        function closeProfileModal() { document.getElementById('profileModal').classList.add('hidden'); }
-
-        async function fetchAddressByCep(cepRaw) {
-            const cep = cepRaw.replace(/\D/g, "");
-            if (cep.length !== 8) return;
-            try {
-                showToast('Buscando endereço...');
-                const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-                const data = await res.json();
-                if (!data.erro) {
-                    document.getElementById('profStreet').value = data.logradouro || '';
-                    document.getElementById('profNeighborhood').value = data.bairro || '';
-                    document.getElementById('profCity').value = data.localidade || '';
-                    document.getElementById('profState').value = data.uf || '';
-                    showToast('Endereço carregado!');
-                } else {
-                    showToast('CEP não encontrado.');
-                }
-            } catch (err) {}
-        }
-
-        function submitProfile(e) {
-            e.preventDefault();
-            if (currentUser.profileCompleted) return;
-            currentUser.profileCompleted = true;
-            currentUser.points += 5000;
-            localStorage.setItem('biel_user_' + currentUser.username, JSON.stringify(currentUser));
-            closeProfileModal();
-            renderDashboard();
-            showToast('Perfil salvo! +5.000 Pontos!');
-        }
-
-        function claimCheckin() {
-            const today = new Date().toDateString();
-            if (currentUser.lastCheckin === today) {
-                showToast('Check-in já resgatado hoje!');
-                return;
-            }
-            currentUser.lastCheckin = today;
-            currentUser.points += 1000;
-            localStorage.setItem('biel_user_' + currentUser.username, JSON.stringify(currentUser));
-            renderDashboard();
-            showToast('+1.000 Pontos creditados!');
-        }
-
-        function openWithdrawModal() { document.getElementById('withdrawModal').classList.remove('hidden'); document.getElementById('withdrawErrorMsg').classList.add('hidden'); }
-        function closeWithdrawModal() { document.getElementById('withdrawModal').classList.add('hidden'); }
-
-        function attemptWithdraw() {
-            const money = currentUser.points / 10000;
-            if (money < 50) {
-                document.getElementById('withdrawErrorMsg').classList.remove('hidden');
-            } else {
-                showToast('Saque solicitado com sucesso!');
-                closeWithdrawModal();
-            }
-        }
-
-        function openChatSupportModal() { document.getElementById('chatSupportModal').classList.remove('hidden'); }
-        function closeChatSupportModal() { document.getElementById('chatSupportModal').classList.add('hidden'); }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').innerText = msg;
-            toast.classList.remove('hidden');
-            setTimeout(() => toast.classList.add('hidden'), 3000);
-        }
-
-        window.onload = () => {
-            const active = localStorage.getItem('biel_active');
-            if (active) {
-                const savedUser = localStorage.getItem('biel_user_' + active);
-                if (savedUser) {
-                    currentUser = JSON.parse(savedUser);
-                    renderDashboard();
-                }
-            }
-        };
-    </script>
-</body>
-</html>
+          
