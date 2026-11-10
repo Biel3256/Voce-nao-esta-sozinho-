@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biel Crescimento - Plataforma de Missões Completa</title>
+    <title>Biel Crescimento - Plataforma Oficial de Recompensas</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
@@ -11,12 +11,12 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         * { font-family: 'Montserrat', sans-serif; }
         body {
-            background: radial-gradient(circle at 50% 20%, #4a152d 0%, #201335 40%, #100f24 70%, #080811 100%);
+            background: radial-gradient(circle at 50% 15%, #2a081a 0%, #150926 40%, #0a0917 70%, #030308 100%);
             min-height: 100vh;
             color: #f8fafc;
         }
@@ -29,16 +29,34 @@
             animation: shine 3.5s linear infinite;
         }
         @keyframes shine { to { background-position: 200% center; } }
+        
         .glass-card-ref {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-            backdrop-filter: blur(35px);
-            -webkit-backdrop-filter: blur(35px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
         }
+        .glass-card-ref:hover {
+            border-color: rgba(167, 139, 250, 0.35);
+        }
+
+        /* Card Elegante dos Saldos */
+        .balance-badge {
+            background: rgba(15, 12, 29, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .balance-badge:hover {
+            border-color: rgba(167, 139, 250, 0.5);
+            transform: translateY(-2px);
+        }
+
         .line-input {
             border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             background: transparent;
             border-radius: 0;
             transition: all 0.3s ease;
@@ -54,13 +72,27 @@
             box-shadow: 0 8px 25px rgba(41, 64, 139, 0.4);
         }
         .btn-gradient-ref:hover { opacity: 0.95; transform: translateY(-1px); }
-        .disabled-card { opacity: 0.65; filter: grayscale(0.3); cursor: not-allowed; }
-        
-        /* Acordeão de FAQ e Termos */
+
+        /* FAQ Acordeão */
         .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
         .faq-item.active .faq-content { max-height: 200px; }
         .faq-item.active .faq-icon { transform: rotate(180deg); }
         .faq-icon { transition: transform 0.3s ease; }
+
+        /* Roleta Canvas */
+        #rouletteCanvas {
+            transition: transform 5s cubic-bezier(0.15, 0.99, 0.18, 1);
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+
+        /* Animação do Baú */
+        @keyframes chestGlow {
+            0%, 100% { transform: scale(1) translateY(0); filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.4)); }
+            50% { transform: scale(1.04) translateY(-4px); filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.8)); }
+        }
+        .chest-drawing-anim {
+            animation: chestGlow 2.5s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="min-h-screen relative p-4 flex flex-col justify-between">
@@ -121,7 +153,6 @@
                         class="line-input w-full pl-3 pr-8 py-1.5 text-sm text-white placeholder-white/60">
                 </div>
                 
-                <!-- ACEITE DOS TERMOS NO CADASTRO -->
                 <div class="flex items-start space-x-2 pt-1">
                     <input type="checkbox" id="termsCheck" required class="custom-checkbox mt-0.5">
                     <label for="termsCheck" class="text-[10px] text-white/70 leading-tight">
@@ -140,308 +171,271 @@
         </div>
     </div>
 
-    <!-- TELA DASHBOARD (PAINEL DE MISSÕES COMPLETO) -->
+    <!-- TELA DASHBOARD (SUPER ORGANIZADA E BONITA) -->
     <div id="dashboardScreen" class="relative z-10 w-full max-w-5xl mx-auto hidden py-4 pb-20">
         
-        <!-- HEADER DASHBOARD -->
-        <header class="flex flex-col md:flex-row md:items-center justify-between glass-card-ref rounded-2xl p-4 md:p-6 mb-6 gap-4">
-            <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center font-bold text-xl border-2 border-white/30">
-                    <span id="userAvatar">B</span>
-                </div>
-                <div>
-                    <h2 class="font-extrabold text-lg text-white" id="displayUsername">Usuário</h2>
-                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                        <i class="fa-solid fa-circle text-[6px] mr-1 text-emerald-400"></i> Conta Verificada
-                    </span>
-                </div>
-            </div>
-
-            <!-- SALDOS -->
-            <div class="flex items-center space-x-3">
-                <div class="bg-slate-900/60 border border-purple-500/30 px-4 py-2 rounded-xl text-right">
-                    <span class="text-[10px] uppercase font-bold text-purple-300 block">Pontos</span>
-                    <div class="text-xl font-extrabold text-purple-200 flex items-center justify-end space-x-1">
-                        <i class="fa-solid fa-coins text-amber-400 text-sm"></i>
-                        <span id="ptsBalance">0</span>
+        <!-- HEADER DO DASHBOARD (SALDO BONITO E ALINHADO) -->
+        <header class="glass-card-ref rounded-3xl p-5 md:p-6 mb-6">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+                
+                <!-- Perfil do Usuário -->
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center font-black text-2xl border border-white/30 shadow-xl shrink-0">
+                        <span id="userAvatar">B</span>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <h2 class="font-extrabold text-xl text-white tracking-wide" id="displayUsername">Usuário</h2>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                                <i class="fa-solid fa-circle-check mr-1 text-emerald-400"></i> Verificado
+                            </span>
+                        </div>
+                        <p class="text-xs text-purple-300/80 font-medium mt-0.5">Nível 1 • Usuário Ativo</p>
                     </div>
                 </div>
 
-                <div class="bg-slate-900/60 border border-emerald-500/30 px-4 py-2 rounded-xl text-right">
-                    <span class="text-[10px] uppercase font-bold text-emerald-400 block">Saldo (R$)</span>
-                    <div class="text-xl font-extrabold text-emerald-300">
-                        R$ <span id="moneyBalance">0.00</span>
+                <!-- Saldos perfeitamente alinhados e elegantes -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <!-- Card de Pontos -->
+                    <div class="balance-badge px-4 py-2.5 rounded-2xl flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-coins text-amber-400"></i>
+                        </div>
+                        <div>
+                            <span class="text-[9px] font-bold uppercase tracking-wider text-purple-300 block">Pontos</span>
+                            <span class="text-lg font-black text-white" id="ptsBalance">0</span>
+                        </div>
                     </div>
+
+                    <!-- Card de Saldo R$ -->
+                    <div class="balance-badge px-4 py-2.5 rounded-2xl flex items-center space-x-3 border-emerald-500/30">
+                        <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-brazilian-real-sign"></i>
+                        </div>
+                        <div>
+                            <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-400 block">Saldo Atual</span>
+                            <span class="text-lg font-black text-emerald-300">R$ <span id="moneyBalance">0.00</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Botão de Sair -->
+                    <button onclick="handleLogout()" title="Sair da Conta" class="p-3 bg-red-500/15 hover:bg-red-500/25 text-red-400 rounded-2xl transition border border-red-500/30">
+                        <i class="fa-solid fa-right-from-bracket text-base"></i>
+                    </button>
                 </div>
 
-                <button onclick="handleLogout()" title="Sair" class="p-3 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-xl transition border border-red-500/30">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </button>
             </div>
         </header>
 
-        <!-- BANNER CONVERSÃO & SAQUE -->
-        <div class="glass-card-ref rounded-2xl p-4 mb-6 border border-purple-500/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-            <div class="flex items-center space-x-3">
-                <div class="p-3 bg-purple-500/20 rounded-xl text-purple-300">
-                    <i class="fa-solid fa-scale-balanced text-xl"></i>
+        <!-- BANNER CONVERSÃO E RESGATE DE SAQUE PIX -->
+        <div class="glass-card-ref rounded-3xl p-5 mb-8 border border-purple-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div class="flex items-center space-x-4">
+                <div class="p-3.5 bg-purple-500/20 rounded-2xl text-purple-300 shrink-0">
+                    <i class="fa-solid fa-scale-balanced text-2xl"></i>
                 </div>
                 <div>
-                    <h3 class="font-bold text-sm text-white">Taxa de Conversão Oficial</h3>
-                    <p class="text-xs text-white/70">10.000 Pontos = <b>R$ 1,00</b> | Mínimo para saque: <b>R$ 50,00</b></p>
+                    <h3 class="font-extrabold text-sm text-white">Taxa Oficial de Conversão</h3>
+                    <p class="text-xs text-white/70">10.000 Pontos = <b class="text-emerald-400">R$ 1,00</b> | Mínimo para saque: <b class="text-emerald-400">R$ 50,00</b></p>
                 </div>
             </div>
-            <button onclick="openWithdrawModal()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-xs uppercase tracking-wider transition shadow-lg">
-                <i class="fa-solid fa-money-bill-transfer mr-1"></i> Sacar PIX
+            <button onclick="openWithdrawModal()" class="w-full sm:w-auto px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-extrabold text-xs uppercase tracking-wider transition shadow-lg shrink-0">
+                <i class="fa-solid fa-money-bill-transfer mr-1.5"></i> Sacar via PIX
             </button>
         </div>
 
-        <!-- LISTA COMPLETA DE MISSÕES -->
-        <div class="space-y-6">
-
-            <!-- 1. PERFIL COMPLETO -->
-            <div>
-                <h3 class="text-base font-bold text-purple-300 mb-3 flex items-center">
-                    <i class="fa-solid fa-star text-amber-400 mr-2"></i> Missão Principal de Boas-Vindas
+        <!-- SEÇÃO 1: RECOMPENSAS DIÁRIAS (GRID ORGANIZADO) -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-base font-extrabold text-white flex items-center">
+                    <i class="fa-solid fa-gift text-amber-400 mr-2"></i> Recompensas Diárias Grátis
                 </h3>
-                <div class="glass-card-ref rounded-2xl p-5 border border-purple-500/40 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div class="flex items-center space-x-4">
-                        <div class="p-4 bg-purple-600/30 border border-purple-400/40 rounded-2xl text-purple-300 text-2xl">
-                            <i class="fa-solid fa-id-card"></i>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                
+                <!-- Card Baú Diário -->
+                <div class="glass-card-ref rounded-3xl p-5 border border-amber-500/40 flex flex-col justify-between">
+                    <div class="flex items-start space-x-4 mb-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-600 to-yellow-400 flex items-center justify-center border border-amber-300/60 shadow-xl chest-drawing-anim shrink-0">
+                            <i class="fa-solid fa-vault text-slate-950 text-2xl"></i>
                         </div>
                         <div>
-                            <span class="bg-amber-500/20 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-500/30">RECOMPENSA IMEDIATA</span>
-                            <h4 class="font-bold text-white text-base mt-1">Preencher Perfil Completo</h4>
-                            <p class="text-xs text-white/70">Cadastre a Chave PIX e endereço via CEP para liberar resgates.</p>
-                            <span class="text-xs text-amber-400 font-bold mt-1 inline-block">+5.000 Pontos (R$ 0,50)</span>
+                            <span class="bg-amber-500/20 text-amber-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-amber-500/30">ABERTURA 24H</span>
+                            <h4 class="font-extrabold text-white text-base mt-1">Baú Misterioso Diário</h4>
+                            <p class="text-xs text-white/70 mt-0.5">Abra 1 baú grátis por dia e receba até 15.000 pontos!</p>
                         </div>
                     </div>
-                    <button id="btnProfileMission" onclick="openProfileModal()" class="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl text-xs uppercase tracking-wider">
-                        Preencher Agora
-                    </button>
+                    <div class="flex items-center justify-between pt-3 border-t border-white/10">
+                        <span id="chestStatusText" class="text-xs text-amber-400 font-bold"><i class="fa-solid fa-gift mr-1"></i> Baú Disponível</span>
+                        <button id="btnOpenChest" onclick="openChestModal()" class="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-yellow-600 text-slate-950 font-extrabold rounded-xl text-xs uppercase tracking-wider transition shadow-lg">
+                            <i class="fa-solid fa-key mr-1"></i> Abrir Baú
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-            <!-- 2. CHECK-IN DIÁRIO -->
-            <div>
-                <h3 class="text-base font-bold text-purple-300 mb-3 flex items-center">
-                    <i class="fa-solid fa-calendar-check text-blue-400 mr-2"></i> Check-in Diário
-                </h3>
-                <div class="glass-card-ref rounded-2xl p-5 border border-white/10 flex items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                        <div class="p-3 bg-blue-500/20 text-blue-400 rounded-xl text-xl"><i class="fa-solid fa-calendar-day"></i></div>
+                <!-- Card Roleta Pro -->
+                <div class="glass-card-ref rounded-3xl p-5 border border-pink-500/40 flex flex-col justify-between">
+                    <div class="flex items-start space-x-4 mb-4">
+                        <div class="w-14 h-14 bg-pink-600/30 border border-pink-400/40 rounded-2xl text-pink-300 text-2xl flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-dharmachakra"></i>
+                        </div>
                         <div>
-                            <h4 class="font-bold text-white text-sm">Bônus Diário de Acesso</h4>
-                            <p class="text-xs text-white/60">Receba pontos diários ao acessar a plataforma.</p>
+                            <span class="bg-pink-500/20 text-pink-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-pink-500/30">GIRO GRATUITO</span>
+                            <h4 class="font-extrabold text-white text-base mt-1">Roleta da Sorte Premium</h4>
+                            <p class="text-xs text-white/70 mt-0.5">Gire grátis a cada 24h e concorra a prêmios em dinheiro!</p>
                         </div>
                     </div>
-                    <button onclick="claimCheckin()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase rounded-xl">
-                        +1.000 Pts
-                    </button>
-                </div>
-            </div>
-
-            <!-- 3. BAIXAR APPS & GANHAR (EM BREVE) -->
-            <div>
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-base font-bold text-purple-300 flex items-center">
-                        <i class="fa-solid fa-mobile-screen-button text-emerald-400 mr-2"></i> Baixar Apps & Ganhar
-                    </h3>
-                    <span class="text-[10px] bg-red-500/20 text-red-300 px-2.5 py-0.5 rounded-full border border-red-500/30 uppercase font-bold">Indisponível</span>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <i class="fa-brands fa-tiktok text-3xl text-pink-500 mb-2"></i>
-                        <h4 class="font-bold text-white text-sm">Baixar e Criar Conta no TikTok</h4>
-                        <p class="text-[11px] text-white/60 my-1">Instale o app e mantenha-o aberto por 3 minutos.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+50.000 Pontos (R$ 5,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <i class="fa-solid fa-bolt text-3xl text-amber-400 mb-2"></i>
-                        <h4 class="font-bold text-white text-sm">Instalar Kwai Recompensas</h4>
-                        <p class="text-[11px] text-white/60 my-1">Abra o Kwai e assista a vídeos do feed inicial.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+40.000 Pontos (R$ 4,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <i class="fa-solid fa-wallet text-3xl text-sky-400 mb-2"></i>
-                        <h4 class="font-bold text-white text-sm">Baixar Mercado Pago</h4>
-                        <p class="text-[11px] text-white/60 my-1">Abra a carteira digital e conclua o cadastro básico.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+35.000 Pontos (R$ 3,50)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. AVALIAR APPS & ESTABELECIMENTOS (EM BREVE) -->
-            <div>
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-base font-bold text-purple-300 flex items-center">
-                        <i class="fa-solid fa-star-half-stroke text-amber-400 mr-2"></i> Avaliar & Ganhar
-                    </h3>
-                    <span class="text-[10px] bg-red-500/20 text-red-300 px-2.5 py-0.5 rounded-full border border-red-500/30 uppercase font-bold">Indisponível</span>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <i class="fa-solid fa-store text-3xl text-red-400 mb-2"></i>
-                        <h4 class="font-bold text-white text-sm">Avaliar Restaurantes no Google Maps</h4>
-                        <p class="text-[11px] text-white/60 my-1">Deixe 5 estrelas e comentário em estabelecimento parceiro.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+30.000 Pontos (R$ 3,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <i class="fa-brands fa-google-play text-3xl text-emerald-400 mb-2"></i>
-                        <h4 class="font-bold text-white text-sm">Avaliar App na Play Store</h4>
-                        <p class="text-[11px] text-white/60 my-1">Classifique o aplicativo parceiro com 5 estrelas.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+25.000 Pontos (R$ 2,50)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <i class="fa-solid fa-hotel text-3xl text-cyan-400 mb-2"></i>
-                        <h4 class="font-bold text-white text-sm">Avaliar Pousada Parceira</h4>
-                        <p class="text-[11px] text-white/60 my-1">Escreva breve avaliação no Google Meu Negócio.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+20.000 Pontos (R$ 2,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5. ANÚNCIOS VIP (EM BREVE) -->
-            <div>
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-base font-bold text-purple-300 flex items-center">
-                        <i class="fa-solid fa-play-circle text-pink-400 mr-2"></i> Assistir Anúncios VIP
-                    </h3>
-                    <span class="text-[10px] bg-red-500/20 text-red-300 px-2.5 py-0.5 rounded-full border border-red-500/30 uppercase font-bold">Indisponível</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <div class="p-3 bg-pink-500/20 text-pink-400 rounded-xl w-fit mb-3"><i class="fa-solid fa-rectangle-ad text-xl"></i></div>
-                        <h4 class="font-bold text-white text-sm">Super Anúncio Patrocinado #1</h4>
-                        <p class="text-[11px] text-white/60 my-2">Assista ao vídeo promocional de 60s até o fim.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+50.000 Pontos (R$ 5,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <div class="p-3 bg-purple-500/20 text-purple-400 rounded-xl w-fit mb-3"><i class="fa-solid fa-film text-xl"></i></div>
-                        <h4 class="font-bold text-white text-sm">Anúncio de Alta Recompensa #2</h4>
-                        <p class="text-[11px] text-white/60 my-2">Assista ao trailer parceiro sem pular.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+80.000 Pontos (R$ 8,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10 relative">
-                        <span class="absolute top-3 right-3 text-[9px] bg-slate-800 text-white/70 px-2 py-0.5 rounded font-bold uppercase">Em Breve</span>
-                        <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl w-fit mb-3"><i class="fa-solid fa-crown text-xl"></i></div>
-                        <h4 class="font-bold text-white text-sm">Mega Vídeo Recompensado #3</h4>
-                        <p class="text-[11px] text-white/60 my-2">Assista à apresentação especial de produtos.</p>
-                        <div class="text-xs font-extrabold text-amber-400 mb-3">+100.000 Pontos (R$ 10,00)</div>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Bloqueado</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 6. JOGAR PARA GANHAR (EM BREVE) -->
-            <div>
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-base font-bold text-purple-300 flex items-center">
-                        <i class="fa-solid fa-gamepad text-indigo-400 mr-2"></i> Jogar para Ganhar
-                    </h3>
-                    <span class="text-[10px] bg-red-500/20 text-red-300 px-2.5 py-0.5 rounded-full border border-red-500/30 uppercase font-bold">Indisponível</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10">
-                        <div class="p-3 bg-indigo-500/20 text-indigo-400 rounded-xl w-fit mb-2"><i class="fa-solid fa-ghost text-xl"></i></div>
-                        <h4 class="font-bold text-white text-sm">Jogo da Cobrinha Arcade</h4>
-                        <p class="text-[11px] text-white/60 my-1">Faça 500 pontos no jogo clássico.</p>
-                        <span class="text-xs text-amber-400 font-bold block mb-3">+25.000 Pontos</span>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Em Breve</button>
-                    </div>
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10">
-                        <div class="p-3 bg-amber-500/20 text-amber-400 rounded-xl w-fit mb-2"><i class="fa-solid fa-arrows-spin text-xl"></i></div>
-                        <h4 class="font-bold text-white text-sm">Roleta da Sorte Diária</h4>
-                        <p class="text-[11px] text-white/60 my-1">Gire a roleta e ganhe prêmios em pontos.</p>
-                        <span class="text-xs text-amber-400 font-bold block mb-3">Até 200.000 Pontos</span>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Em Breve</button>
-                    </div>
-                    <div class="glass-card-ref rounded-2xl p-4 disabled-card border border-white/10">
-                        <div class="p-3 bg-cyan-500/20 text-cyan-400 rounded-xl w-fit mb-2"><i class="fa-solid fa-gem text-xl"></i></div>
-                        <h4 class="font-bold text-white text-sm">Mineração de Pontos</h4>
-                        <p class="text-[11px] text-white/60 my-1">Deixe o mini-game ativo acumulando tokens.</p>
-                        <span class="text-xs text-amber-400 font-bold block mb-3">+1.000 Pts / min</span>
-                        <button disabled class="w-full py-2 bg-slate-700 text-white/50 rounded-xl text-xs font-bold uppercase">Em Breve</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SEÇÃO DE DICAS E FAQ (PERGUNTAS FREQUENTES) -->
-            <div class="mt-8">
-                <h3 class="text-base font-bold text-purple-300 mb-3 flex items-center">
-                    <i class="fa-solid fa-circle-question text-purple-400 mr-2"></i> Dicas e Perguntas Frequentes (FAQ)
-                </h3>
-                <div class="space-y-3">
-                    <div class="glass-card-ref rounded-2xl p-4 border border-white/10 faq-item">
-                        <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left font-bold text-sm text-white">
-                            <span>O saque cai na hora?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon text-xs text-purple-400"></i>
+                    <div class="flex items-center justify-between pt-3 border-t border-white/10">
+                        <span class="text-xs text-pink-300 font-bold"><i class="fa-solid fa-trophy mr-1"></i> Até R$ 100,00</span>
+                        <button id="btnOpenRoulette" onclick="openRouletteModal()" class="px-5 py-2.5 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-extrabold rounded-xl text-xs uppercase tracking-wider transition shadow-lg">
+                            <i class="fa-solid fa-play mr-1"></i> Girar Roleta
                         </button>
-                        <div class="faq-content text-xs text-white/70 pt-2 leading-relaxed">
-                            Os pedidos de saque via PIX passam por uma auditoria de segurança interna para evitar fraudes. O prazo médio de processamento e compensação é de até 24 horas úteis.
-                        </div>
-                    </div>
-
-                    <div class="glass-card-ref rounded-2xl p-4 border border-white/10 faq-item">
-                        <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left font-bold text-sm text-white">
-                            <span>Como funciona a conversão de pontos?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon text-xs text-purple-400"></i>
-                        </button>
-                        <div class="faq-content text-xs text-white/70 pt-2 leading-relaxed">
-                            A nossa taxa oficial é de 10.000 Pontos equivalendo a R$ 1,00. Assim que você acumula o saldo mínimo de R$ 50,00 (500.000 pontos), o botão de resgate via PIX é liberado automaticamente.
-                        </div>
-                    </div>
-
-                    <div class="glass-card-ref rounded-2xl p-4 border border-white/10 faq-item">
-                        <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left font-bold text-sm text-white">
-                            <span>Meus dados pessoais estão seguros?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon text-xs text-purple-400"></i>
-                        </button>
-                        <div class="faq-content text-xs text-white/70 pt-2 leading-relaxed">
-                            Sim! Todos os dados inseridos no seu perfil (como CPF, chave PIX e endereço) contam com criptografia avançada de ponta a ponta e sigilo absoluto conforme as diretrizes da LGPD.
-                        </div>
-                    </div>
-
-                    <div class="glass-card-ref rounded-2xl p-4 border border-white/10 faq-item">
-                        <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left font-bold text-sm text-white">
-                            <span>Por que algumas missões aparecem como "Em Breve"?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon text-xs text-purple-400"></i>
-                        </button>
-                        <div class="faq-content text-xs text-white/70 pt-2 leading-relaxed">
-                            Estamos atualizando constantemente os nossos servidores e integrando novas APIs de anúncios e jogos. As funções indisponíveis serão liberadas gradualmente em breve para todos os usuários cadastrados.
-                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
 
-        <!-- RODAPÉ COM SUPORTE TELEGRAM E TERMOS -->
+        <!-- SEÇÃO 2: MISSÕES E CONVITES (GRID ORGANIZADO) -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-base font-extrabold text-white flex items-center">
+                    <i class="fa-solid fa-tasks text-purple-400 mr-2"></i> Missões & Convidados
+                </h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <!-- Convidados -->
+                <div class="glass-card-ref rounded-3xl p-5 border border-pink-500/40 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-pink-500/20 text-pink-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-pink-500/30">RECOMPENSA R$ 10,00</span>
+                            <i class="fa-solid fa-users text-pink-400 text-lg"></i>
+                        </div>
+                        <h4 class="font-extrabold text-white text-base">Convidados & Indicações</h4>
+                        <p class="text-xs text-white/70 mt-1">Ganhe +100.000 Pontos (R$ 10,00) por cada amigo ativo convidado!</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs text-amber-400 font-bold">+100.000 Pts / Amigo</span>
+                        <button onclick="openReferralModal()" class="px-5 py-2.5 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-extrabold rounded-xl text-xs uppercase tracking-wider transition shadow-lg">
+                            <i class="fa-solid fa-share-nodes mr-1"></i> Ver Convidados
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Perfil Completo -->
+                <div class="glass-card-ref rounded-3xl p-5 border border-purple-500/40 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-amber-500/20 text-amber-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-amber-500/30">BÔNUS ÚNICO</span>
+                            <i class="fa-solid fa-id-card text-purple-300 text-lg"></i>
+                        </div>
+                        <h4 class="font-extrabold text-white text-base">Preencher Perfil Completo</h4>
+                        <p class="text-xs text-white/70 mt-1">Cadastre sua Chave PIX e endereço para liberar saques com segurança.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs text-amber-400 font-bold">+5.000 Pts (R$ 0,50)</span>
+                        <button id="btnProfileMission" onclick="openProfileModal()" class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-extrabold rounded-xl text-xs uppercase tracking-wider transition shadow-lg">
+                            Preencher Agora
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SEÇÃO 3: CHECK-IN DIÁRIO -->
+        <div class="mb-8">
+            <div class="glass-card-ref rounded-3xl p-5 border border-blue-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-4">
+                    <div class="p-3.5 bg-blue-500/20 text-blue-400 rounded-2xl text-2xl shrink-0">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-white text-base">Check-in Diário de Acesso</h4>
+                        <p class="text-xs text-white/70">Acesse a plataforma diariamente para resgatar seus pontos diários.</p>
+                    </div>
+                </div>
+                <button onclick="claimCheckin()" class="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-lg shrink-0">
+                    +1.000 Pontos Hoje
+                </button>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 4: RANKING SEMANAL (100% REAL) -->
+        <div class="mb-8">
+            <h3 class="text-base font-extrabold text-white mb-4 flex items-center">
+                <i class="fa-solid fa-trophy text-amber-400 mr-2"></i> 9. Ranking Semanal de Atividade
+            </h3>
+            <div class="glass-card-ref rounded-3xl p-5 border border-amber-500/30">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <span class="bg-amber-500/20 text-amber-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-amber-500/30">COMPETIÇÃO REAL</span>
+                        <h4 class="font-extrabold text-white text-base mt-1">Top Usuários Mais Ativos</h4>
+                        <p class="text-xs text-white/70">Classificação atual dos usuários cadastrados na plataforma.</p>
+                    </div>
+                    <i class="fa-solid fa-ranking-star text-3xl text-amber-400/40"></i>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-900/80 text-purple-300 uppercase font-bold text-[10px]">
+                            <tr>
+                                <th class="p-3.5 rounded-l-xl">Posição</th>
+                                <th class="p-3.5">Usuário Real</th>
+                                <th class="p-3.5">Pontuação Acumulada</th>
+                                <th class="p-3.5 rounded-r-xl text-right">Equivalente (R$)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rankingTableBody" class="divide-y divide-white/10 text-white/90">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 5: FAQ & DUVIDAS -->
+        <div class="mb-8">
+            <h3 class="text-base font-extrabold text-white mb-4 flex items-center">
+                <i class="fa-solid fa-circle-question text-purple-400 mr-2"></i> Perguntas Frequentes (FAQ)
+            </h3>
+            <div class="space-y-3">
+                <div class="glass-card-ref rounded-2xl p-4 border border-white/10 faq-item">
+                    <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left font-bold text-sm text-white">
+                        <span>O saque cai na hora?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon text-xs text-purple-400"></i>
+                    </button>
+                    <div class="faq-content text-xs text-white/70 pt-2 leading-relaxed">
+                        Os pedidos de saque via PIX passam por uma auditoria de segurança interna para evitar fraudes. O prazo médio de processamento e compensação é de até 24 horas úteis.
+                    </div>
+                </div>
+
+                <div class="glass-card-ref rounded-2xl p-4 border border-white/10 faq-item">
+                    <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left font-bold text-sm text-white">
+                        <span>Como funciona a conversão de pontos?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon text-xs text-purple-400"></i>
+                    </button>
+                    <div class="faq-content text-xs text-white/70 pt-2 leading-relaxed">
+                        A nossa taxa oficial é de 10.000 Pontos equivalendo a R$ 1,00. Assim que você acumula o saldo mínimo de R$ 50,00 (500.000 pontos), o botão de resgate via PIX é liberado automaticamente.
+                    </div>
+                </div>
+
+                <div class="glass-card-ref rounded-2xl p-4 border border-white/10 faq-item">
+                    <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left font-bold text-sm text-white">
+                        <span>Meus dados pessoais estão seguros?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon text-xs text-purple-400"></i>
+                    </button>
+                    <div class="faq-content text-xs text-white/70 pt-2 leading-relaxed">
+                        Sim! Todos os dados inseridos no seu perfil (como CPF, chave PIX e endereço) contam com criptografia avançada de ponta a ponta e sigilo absoluto conforme as diretrizes da LGPD.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RODAPÉ DA PLATAFORMA -->
         <footer class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 gap-4">
             <div>© Biel Crescimento - Todos os direitos reservados.</div>
             <div class="flex items-center space-x-3">
                 <button type="button" onclick="openTermsModal()" class="hover:text-white underline text-[11px]">Termos de Uso</button>
-                <button type="button" onclick="showToast('Suporte Telegram temporariamente indisponível (Em Breve)')" class="flex items-center space-x-2 bg-sky-500/25 hover:bg-sky-500/35 border border-sky-500/30 text-sky-300 px-4 py-2 rounded-xl transition">
-                    <i class="fa-brands fa-telegram text-base"></i>
-                    <span class="font-bold">Suporte Telegram (Em Breve)</span>
-                    <span class="text-[9px] bg-red-500/20 text-red-300 px-1.5 py-0.5 rounded border border-red-500/30 font-bold">OFFLINE</span>
-                </button>
             </div>
         </footer>
     </div>
@@ -449,12 +443,131 @@
     <!-- WIDGET FLUTUANTE DE SUPORTE CHAT -->
     <div class="fixed bottom-6 right-6 z-40">
         <button type="button" onclick="openChatSupportModal()" class="relative bg-gradient-to-tr from-purple-600 to-indigo-600 hover:scale-105 transition transform text-white p-4 rounded-full shadow-2xl border-2 border-white/20 flex items-center justify-center">
-            <i class="fa-solid fa-comments text-xl"></i>
+            <i class="fa-solid fa-headset text-xl"></i>
             <span class="absolute -top-1 -right-1 flex h-4 w-4">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-4 w-4 bg-pink-500"></span>
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500"></span>
             </span>
         </button>
+    </div>
+
+    <!-- MODAL DE SUPORTE CHAT AO VIVO COM A BOT LUIZA (TOTALMENTE FUNCIONAL) -->
+    <div id="chatSupportModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card-ref rounded-3xl max-w-md w-full p-5 border border-purple-500/40 relative flex flex-col h-[520px]">
+            <!-- Header Chat -->
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center font-bold text-white border border-white/30">
+                            L
+                        </div>
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-sm text-white flex items-center">
+                            Luiza <span class="text-[9px] bg-purple-500/30 text-purple-200 px-1.5 py-0.2 rounded ml-1.5">Atendente Virtual</span>
+                        </h4>
+                        <p class="text-[10px] text-emerald-400 font-bold">● Suporte Biel Crescimento</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeChatSupportModal()" class="text-white/50 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Corpo das Mensagens -->
+            <div id="chatMessages" class="flex-1 overflow-y-auto my-3 space-y-3 pr-1 text-xs">
+            </div>
+
+            <!-- Form de Envio -->
+            <form onsubmit="sendChatMessage(event)" class="pt-2 border-t border-white/10 flex items-center space-x-2">
+                <input type="text" id="chatInput" placeholder="Digite sua dúvida ou mensagem..." required class="flex-1 bg-slate-900/90 border border-white/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-400">
+                <button type="submit" class="p-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl transition">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DO BAÚ DE RECOMPENSA DIÁRIA -->
+    <div id="chestModal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card-ref rounded-3xl max-w-sm w-full p-6 border border-amber-500/40 relative text-center flex flex-col items-center">
+            <button type="button" onclick="closeChestModal()" class="absolute top-4 right-4 text-white/50 hover:text-white z-10"><i class="fa-solid fa-xmark text-lg"></i></button>
+
+            <div class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-amber-600 to-yellow-400 flex items-center justify-center border-4 border-amber-300/80 shadow-2xl mb-3 chest-drawing-anim">
+                <i class="fa-solid fa-vault text-slate-950 text-5xl"></i>
+            </div>
+            <h3 class="text-xl font-extrabold text-white">Baú Diário de Recompensa</h3>
+            <p id="chestModalDesc" class="text-xs text-white/70 mt-1 mb-4">Abra seu baú diário e receba pontos surpresa com limite definido!</p>
+
+            <div id="chestResultBox" class="my-3 text-sm font-bold text-amber-300 min-h-[40px] flex items-center justify-center"></div>
+
+            <button id="btnActionChest" type="button" onclick="claimChest()" class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-slate-950 font-extrabold rounded-xl text-xs uppercase tracking-wider transition shadow-lg mt-2">
+                ABRIR BAÚ AGORA
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DA ROLETA DA SORTE PROFISSIONAL -->
+    <div id="rouletteModal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card-ref rounded-3xl max-w-sm w-full p-6 border border-pink-500/40 relative text-center flex flex-col items-center">
+            <button type="button" onclick="closeRouletteModal()" class="absolute top-4 right-4 text-white/50 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+
+            <div class="w-12 h-12 bg-pink-500/20 text-pink-400 rounded-2xl flex items-center justify-center mb-2 text-xl">
+                <i class="fa-solid fa-dharmachakra"></i>
+            </div>
+            <h3 class="text-xl font-extrabold text-white">Roleta Diária Pro</h3>
+            <p class="text-xs text-white/70 mt-1 mb-3">Gire grátis a cada 24 horas. Boa sorte!</p>
+
+            <div class="relative w-64 h-64 my-2 flex items-center justify-center">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-30 text-pink-500 text-2xl filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                    <i class="fa-solid fa-location-pin fa-rotate-180"></i>
+                </div>
+                <canvas id="rouletteCanvas" width="280" height="280" class="rounded-full border-4 border-pink-500/40 shadow-2xl bg-slate-900"></canvas>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-gradient-to-tr from-purple-600 to-pink-600 rounded-full z-20 flex items-center justify-center border-2 border-white/40 shadow-lg pointer-events-none text-white text-xs font-bold">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+
+            <div id="rouletteResult" class="text-xs font-bold text-pink-300 min-h-[24px] my-2"></div>
+
+            <button id="btnSpinRoulette" type="button" onclick="spinRoulette()" class="w-full py-3.5 bg-gradient-to-r from-pink-600 to-purple-600 hover:opacity-95 text-white font-extrabold rounded-xl text-xs uppercase tracking-wider transition shadow-lg mt-2">
+                GIRAR ROLETA AGORA
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE INDIQUE AMIGOS E CONVIDADOS -->
+    <div id="referralModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card-ref rounded-3xl max-w-md w-full p-6 border border-pink-500/40 relative text-center">
+            <button type="button" onclick="closeReferralModal()" class="absolute top-4 right-4 text-white/50 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="w-12 h-12 bg-pink-500/20 text-pink-400 rounded-2xl flex items-center justify-center mx-auto mb-3 text-xl"><i class="fa-solid fa-user-plus"></i></div>
+            <h3 class="text-xl font-extrabold text-white">Convidados & Indicações</h3>
+            <p class="text-xs text-white/70 mt-1">Ganhe <b>R$ 10,00</b> (+100.000 pontos) por amigo ativo convidado!</p>
+            
+            <div class="my-4 bg-slate-900/80 p-3 rounded-2xl border border-white/10 text-left">
+                <span class="text-[10px] uppercase font-bold text-pink-300 block mb-1">Seu Link Exclusivo de Indicação:</span>
+                <div class="flex items-center justify-between bg-slate-950 p-2.5 rounded-xl border border-white/10">
+                    <span id="refLinkText" class="text-xs text-white/80 truncate mr-2 select-all">https://bielcrescimento.com/ref?user=convite</span>
+                    <button type="button" onclick="copyReferralLink()" class="px-3 py-1.5 bg-pink-600 hover:bg-pink-500 text-white rounded-lg text-xs font-bold uppercase shrink-0 transition">
+                        <i class="fa-solid fa-copy"></i> Copiar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lista de Amigos Convidados -->
+            <div class="text-left mb-4">
+                <h4 class="text-xs font-bold text-white mb-2 flex items-center justify-between">
+                    <span>Amigos Convidados:</span>
+                    <span id="invitedCount" class="text-pink-400 font-extrabold">0 registrados</span>
+                </h4>
+                <div id="invitedList" class="bg-slate-900/60 p-3 rounded-xl border border-white/10 max-h-32 overflow-y-auto space-y-1.5 text-[11px] text-white/70">
+                    <p class="text-center text-white/40">Nenhum convidado registrado ainda.</p>
+                </div>
+            </div>
+
+            <button type="button" onclick="closeReferralModal()" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl text-xs uppercase">
+                Fechar
+            </button>
+        </div>
     </div>
 
     <!-- MODAL DE PREENCHER PERFIL COMPLETO -->
@@ -466,14 +579,6 @@
                 <div class="w-12 h-12 bg-purple-500/20 text-purple-300 rounded-2xl flex items-center justify-center mx-auto mb-2 text-xl"><i class="fa-solid fa-user-gear"></i></div>
                 <h3 class="text-xl font-extrabold text-white">Preencher Dados do Perfil</h3>
                 <p class="text-xs text-white/70 mt-1">Complete seus dados para resgatar <b>5.000 Pontos</b> instantaneamente!</p>
-            </div>
-
-            <div class="bg-emerald-950/50 border border-emerald-500/40 rounded-2xl p-3 mb-5 flex items-start space-x-3">
-                <i class="fa-solid fa-shield-halved text-emerald-400 text-lg mt-0.5"></i>
-                <div class="text-[11px] text-emerald-200">
-                    <strong class="font-bold text-emerald-300 block mb-0.5">Dados 100% Criptografados de Ponta a Ponta 🔒</strong>
-                    Suas informações pessoais são totalmente confidenciais e mantidas em sigilo absoluto. Não temos acesso direto aos seus dados privados.
-                </div>
             </div>
 
             <form onsubmit="submitProfile(event)" class="space-y-3 text-left">
@@ -516,18 +621,6 @@
         </div>
     </div>
 
-    <!-- MODAL CHAT DE SUPORTE -->
-    <div id="chatSupportModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-card-ref rounded-3xl max-w-sm w-full p-6 border border-purple-500/40 relative text-center">
-            <button type="button" onclick="closeChatSupportModal()" class="absolute top-4 right-4 text-white/50 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <div class="w-12 h-12 bg-purple-500/20 text-purple-300 rounded-2xl flex items-center justify-center mx-auto mb-3 text-xl"><i class="fa-solid fa-headset"></i></div>
-            <h3 class="text-lg font-extrabold text-white">Suporte via Chat ao Vivo</h3>
-            <span class="inline-block my-2 text-[10px] bg-red-500/20 text-red-300 px-3 py-1 rounded-full border border-red-500/30 font-bold uppercase">Disponível em Breve</span>
-            <p class="text-xs text-white/70 my-3">Nossa equipe de atendimento via chat estará disponível na próxima atualização.</p>
-            <button type="button" onclick="closeChatSupportModal()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl text-xs uppercase">Entendido</button>
-        </div>
-    </div>
-
     <!-- MODAL DE TERMOS DE USO -->
     <div id="termsModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
         <div class="glass-card-ref rounded-3xl max-w-lg w-full p-6 border border-purple-500/40 relative max-h-[85vh] overflow-y-auto text-left">
@@ -537,21 +630,32 @@
                 <p><b>1. Aceitação dos Termos:</b> Ao se cadastrar na plataforma Biel Crescimento, você concorda integralmente com as regras de pontuação, resgate, privacidade e uso descritas neste documento.</p>
                 <p><b>2. Recompensas e Pontos:</b> Os pontos acumulados por missões, check-ins e preenchimento de perfil são convertidos para Reais (R$) de acordo com a cotação oficial estipulada no painel (10.000 pontos = R$ 1,00).</p>
                 <p><b>3. Saques e Pagamentos:</b> O resgate via PIX exige um valor mínimo acumulado de R$ 50,00. As solicitações passam por análise preventiva contra fraudes e robôs automatizados.</p>
-                <p><b>4. Contas Múltiplas:</b> É terminantemente proibido o uso de contas duplicadas ou softwares de automação por um mesmo usuário. Contas suspeitas poderão ser banidas permanentemente sem aviso prévio.</p>
-                <p><b>5. Privacidade de Dados:</b> Garantimos proteção total e criptografia de ponta a ponta para todos os dados cadastrados. Suas informações nunca serão comercializadas com terceiros.</p>
             </div>
             <button type="button" onclick="closeTermsModal()" class="w-full mt-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl text-xs uppercase">Fechar Termos</button>
         </div>
     </div>
 
-    <!-- TOAST -->
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden bg-slate-900 border border-purple-500/30 text-white px-5 py-3 rounded-full text-xs">
+    <!-- TOAST DE NOTIFICAÇÃO -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden bg-slate-900 border border-purple-500/30 text-white px-5 py-3 rounded-full text-xs shadow-2xl">
         <span id="toastMsg"></span>
     </div>
 
-    <!-- SCRIPT COMPLETO E FUNCIONAL -->
+    <!-- SCRIPT COMPLETO E INTEGRADO -->
     <script>
         let currentUser = null;
+        let rouletteTimerInterval = null;
+        let chestTimerInterval = null;
+
+        const ROULETTE_SECTORS = [
+            { label: "Perdeu", pts: 0, color: "#1e293b", text: "#94a3b8", weight: 35 },
+            { label: "R$ 0,05", pts: 500, color: "#4f46e5", text: "#ffffff", weight: 30 },
+            { label: "R$ 0,10", pts: 1000, color: "#7c3aed", text: "#ffffff", weight: 20 },
+            { label: "R$ 0,50", pts: 5000, color: "#db2777", text: "#ffffff", weight: 10 },
+            { label: "R$ 1,00", pts: 10000, color: "#059669", text: "#ffffff", weight: 3.5 },
+            { label: "R$ 5,00", pts: 50000, color: "#d97706", text: "#ffffff", weight: 1.2 },
+            { label: "R$ 10,00", pts: 100000, color: "#0284c7", text: "#ffffff", weight: 0.28 },
+            { label: "R$ 100,00", pts: 1000000, color: "#dc2626", text: "#ffffff", weight: 0.02 }
+        ];
 
         function switchTab(tab) {
             document.getElementById('loginForm').classList.toggle('hidden', tab !== 'login');
@@ -569,7 +673,7 @@
             if (savedData) {
                 currentUser = JSON.parse(savedData);
             } else {
-                currentUser = { username: user, points: 0, profileCompleted: false };
+                currentUser = { username: user, points: 0, profileCompleted: false, lastRouletteTime: null, lastChestTime: null, invitedUsers: [] };
                 localStorage.setItem('biel_user_' + user, JSON.stringify(currentUser));
             }
             localStorage.setItem('biel_active', user);
@@ -588,7 +692,7 @@
             }
             if (!user) return;
             
-            currentUser = { username: user, points: 0, profileCompleted: false };
+            currentUser = { username: user, points: 0, profileCompleted: false, lastRouletteTime: null, lastChestTime: null, invitedUsers: [] };
             localStorage.setItem('biel_user_' + user, JSON.stringify(currentUser));
             localStorage.setItem('biel_active', user);
             renderDashboard();
@@ -605,12 +709,20 @@
             document.getElementById('moneyBalance').innerText = money;
             document.getElementById('modalCurrentMoney').innerText = money;
             
+            document.getElementById('refLinkText').innerText = `https://bielcrescimento.com/ref?user=${encodeURIComponent(currentUser.username)}`;
+
             if (currentUser.profileCompleted) {
                 const btn = document.getElementById('btnProfileMission');
                 btn.innerText = "Perfil Concluído ✓";
                 btn.disabled = true;
-                btn.className = "w-full md:w-auto px-6 py-3 bg-emerald-600/30 text-emerald-300 font-bold rounded-xl text-xs uppercase cursor-not-allowed";
+                btn.className = "px-5 py-2.5 bg-emerald-600/30 text-emerald-300 font-bold rounded-xl text-xs uppercase cursor-not-allowed";
             }
+
+            drawRouletteCanvas();
+            updateRouletteTimer();
+            updateChestTimer();
+            renderRealRanking();
+            renderInvitedList();
         }
 
         function handleLogout() {
@@ -618,11 +730,354 @@
             location.reload();
         }
 
+        // --- SUPORTE CHAT COM A BOT LUIZA ---
+        function openChatSupportModal() {
+            document.getElementById('chatSupportModal').classList.remove('hidden');
+            const messagesContainer = document.getElementById('chatMessages');
+            
+            if (messagesContainer.children.length === 0) {
+                messagesContainer.innerHTML = `
+                    <div class="flex items-start space-x-2">
+                        <div class="w-7 h-7 rounded-full bg-pink-500 flex items-center justify-center font-bold text-white text-[10px] shrink-0">L</div>
+                        <div class="bg-purple-900/40 border border-purple-500/30 p-3 rounded-2xl text-white/90 max-w-[85%]">
+                            <strong class="text-pink-300 font-bold block mb-1">Luiza • Suporte Biel Crescimento:</strong>
+                            Olá! Sou a Luiza, assistente virtual oficial. Estou identificando o seu cadastro no sistema para agilizar o atendimento. 
+                            <br><br>
+                            Em instantes um atendente humano da nossa equipe vai entrar em contato com você aqui pelo chat. Qual a sua dúvida ou problema?
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function closeChatSupportModal() {
+            document.getElementById('chatSupportModal').classList.add('hidden');
+        }
+
+        function sendChatMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('chatInput');
+            const msgText = input.value.trim();
+            if (!msgText) return;
+
+            const messagesContainer = document.getElementById('chatMessages');
+
+            const userMsgDiv = document.createElement('div');
+            userMsgDiv.className = "flex items-start justify-end space-x-2";
+            userMsgDiv.innerHTML = `
+                <div class="bg-indigo-600/60 border border-indigo-400/30 p-3 rounded-2xl text-white max-w-[85%]">
+                    <strong>Você:</strong> ${msgText}
+                </div>
+            `;
+            messagesContainer.appendChild(userMsgDiv);
+            input.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            setTimeout(() => {
+                const botReplyDiv = document.createElement('div');
+                botReplyDiv.className = "flex items-start space-x-2";
+                botReplyDiv.innerHTML = `
+                    <div class="w-7 h-7 rounded-full bg-pink-500 flex items-center justify-center font-bold text-white text-[10px] shrink-0">L</div>
+                    <div class="bg-purple-900/40 border border-purple-500/30 p-3 rounded-2xl text-white/90 max-w-[85%]">
+                        <strong class="text-pink-300 font-bold block mb-1">Luiza:</strong>
+                        Recebido! Sua mensagem foi anexada ao seu perfil. Por favor, aguarde só um momento que um atendente assumirá a conversa!
+                    </div>
+                `;
+                messagesContainer.appendChild(botReplyDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 1500);
+        }
+
+        function renderInvitedList() {
+            const listEl = document.getElementById('invitedList');
+            const countEl = document.getElementById('invitedCount');
+            if (!listEl || !currentUser) return;
+
+            const invited = currentUser.invitedUsers || [];
+            countEl.innerText = `${invited.length} registrados`;
+
+            if (invited.length === 0) {
+                listEl.innerHTML = `<p class="text-center text-white/40">Nenhum convidado registrado ainda.</p>`;
+                return;
+            }
+
+            listEl.innerHTML = '';
+            invited.forEach(inv => {
+                const item = document.createElement('div');
+                item.className = "flex items-center justify-between bg-slate-950 p-2 rounded-lg border border-white/5";
+                item.innerHTML = `
+                    <span class="font-bold text-white"><i class="fa-solid fa-user text-purple-400 mr-1.5"></i>${inv.name}</span>
+                    <span class="text-emerald-400 font-bold">+100.000 Pts (${inv.status || 'Ativo'})</span>
+                `;
+                listEl.appendChild(item);
+            });
+        }
+
+        function renderRealRanking() {
+            const tableBody = document.getElementById('rankingTableBody');
+            if (!tableBody) return;
+            tableBody.innerHTML = '';
+
+            const realUsers = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('biel_user_')) {
+                    try {
+                        const userData = JSON.parse(localStorage.getItem(key));
+                        if (userData && userData.username) {
+                            realUsers.push(userData);
+                        }
+                    } catch (e) {}
+                }
+            }
+
+            realUsers.sort((a, b) => b.points - a.points);
+
+            if (realUsers.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-white/50">Nenhum usuário ativo registrado no momento.</td></tr>`;
+                return;
+            }
+
+            realUsers.forEach((u, index) => {
+                const tr = document.createElement('tr');
+                tr.className = u.username === currentUser.username ? "bg-purple-900/30 font-bold" : "hover:bg-white/5";
+
+                let posBadge = `<span class="px-2 py-1 rounded bg-slate-800 text-white/80 font-bold">${index + 1}º</span>`;
+                if (index === 0) posBadge = `<span class="text-amber-400 font-extrabold"><i class="fa-solid fa-medal mr-1"></i> 1º Lugar</span>`;
+                else if (index === 1) posBadge = `<span class="text-slate-300 font-extrabold"><i class="fa-solid fa-medal mr-1"></i> 2º Lugar</span>`;
+                else if (index === 2) posBadge = `<span class="text-amber-600 font-extrabold"><i class="fa-solid fa-medal mr-1"></i> 3º Lugar</span>`;
+
+                const userTag = u.username === currentUser.username ? `${u.username} <span class="text-[9px] bg-purple-500/30 text-purple-200 px-1.5 py-0.5 rounded ml-1">(Você)</span>` : u.username;
+                const realMoney = (u.points / 10000).toFixed(2);
+
+                tr.innerHTML = `
+                    <td class="p-3">${posBadge}</td>
+                    <td class="p-3">${userTag}</td>
+                    <td class="p-3 text-amber-400 font-bold"><i class="fa-solid fa-coins text-xs mr-1"></i> ${u.points.toLocaleString('pt-BR')} Pts</td>
+                    <td class="p-3 text-right text-emerald-400 font-bold">R$ ${realMoney}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function drawRouletteCanvas() {
+            const canvas = document.getElementById('rouletteCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const totalSectors = ROULETTE_SECTORS.length;
+            const arc = (2 * Math.PI) / totalSectors;
+            const radius = 140;
+
+            ctx.clearRect(0, 0, 280, 280);
+
+            for (let i = 0; i < totalSectors; i++) {
+                const angle = i * arc;
+                ctx.beginPath();
+                ctx.fillStyle = ROULETTE_SECTORS[i].color;
+                ctx.moveTo(radius, radius);
+                ctx.arc(radius, radius, radius - 6, angle, angle + arc);
+                ctx.lineTo(radius, radius);
+                ctx.fill();
+
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+                ctx.stroke();
+
+                ctx.save();
+                ctx.translate(radius, radius);
+                ctx.rotate(angle + arc / 2);
+                ctx.textAlign = "right";
+                ctx.fillStyle = ROULETTE_SECTORS[i].text;
+                ctx.font = "bold 11px Montserrat";
+                ctx.fillText(ROULETTE_SECTORS[i].label, radius - 22, 4);
+                ctx.restore();
+            }
+        }
+
+        function openRouletteModal() { 
+            document.getElementById('rouletteModal').classList.remove('hidden'); 
+            document.getElementById('rouletteResult').innerText = ''; 
+            updateRouletteTimer(); 
+        }
+        function closeRouletteModal() { document.getElementById('rouletteModal').classList.add('hidden'); }
+
+        function spinRoulette() {
+            if (!currentUser) return;
+            const now = Date.now();
+            const cooldowntime = 24 * 60 * 60 * 1000;
+
+            if (currentUser.lastRouletteTime && (now - currentUser.lastRouletteTime < cooldowntime)) {
+                showToast('Aguarde o temporizador de 24h para girar novamente!');
+                return;
+            }
+
+            const btnSpin = document.getElementById('btnSpinRoulette');
+            btnSpin.disabled = true;
+            btnSpin.classList.add('opacity-50', 'cursor-not-allowed');
+
+            let randomNum = Math.random() * 100;
+            let selectedIndex = 0;
+            let cumulativeWeight = 0;
+
+            for (let i = 0; i < ROULETTE_SECTORS.length; i++) {
+                cumulativeWeight += ROULETTE_SECTORS[i].weight;
+                if (randomNum <= cumulativeWeight) {
+                    selectedIndex = i;
+                    break;
+                }
+            }
+
+            const sectorAngle = 360 / ROULETTE_SECTORS.length;
+            const targetDegree = 360 * 6 + (270 - (selectedIndex * sectorAngle + sectorAngle / 2));
+
+            const canvasEl = document.getElementById('rouletteCanvas');
+            canvasEl.style.transform = `rotate(${targetDegree}deg)`;
+            document.getElementById('rouletteResult').innerText = 'Girando roleta com estilo... ⚡';
+
+            setTimeout(() => {
+                const prize = ROULETTE_SECTORS[selectedIndex];
+                currentUser.lastRouletteTime = Date.now();
+
+                if (prize.pts > 0) {
+                    currentUser.points += prize.pts;
+                    document.getElementById('rouletteResult').innerHTML = `<span class="text-emerald-400 font-bold">Parabéns! Ganhou ${prize.label} (${prize.pts.toLocaleString()} pts)!</span>`;
+                    showToast(`Ganhou ${prize.label}!`);
+                } else {
+                    document.getElementById('rouletteResult').innerHTML = `<span class="text-red-400 font-bold">Não foi dessa vez! Perdeu a chance. Tente amanhã.</span>`;
+                    showToast('Não foi dessa vez!');
+                }
+
+                localStorage.setItem('biel_user_' + currentUser.username, JSON.stringify(currentUser));
+                renderDashboard();
+                updateRouletteTimer();
+            }, 5000);
+        }
+
+        function updateRouletteTimer() {
+            if (!currentUser) return;
+            const btnSpin = document.getElementById('btnSpinRoulette');
+            const now = Date.now();
+            const cooldowntime = 24 * 60 * 60 * 1000;
+
+            if (rouletteTimerInterval) clearInterval(rouletteTimerInterval);
+
+            if (currentUser.lastRouletteTime && (now - currentUser.lastRouletteTime < cooldowntime)) {
+                btnSpin.disabled = true;
+                btnSpin.classList.add('opacity-50', 'cursor-not-allowed');
+
+                rouletteTimerInterval = setInterval(() => {
+                    const diff = (currentUser.lastRouletteTime + cooldowntime) - Date.now();
+                    if (diff <= 0) {
+                        clearInterval(rouletteTimerInterval);
+                        btnSpin.disabled = false;
+                        btnSpin.classList.remove('opacity-50', 'cursor-not-allowed');
+                        btnSpin.innerText = "GIRAR ROLETA AGORA";
+                    } else {
+                        const h = Math.floor(diff / (1000 * 60 * 60)).toString().padStart(2, '0');
+                        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                        const s = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                        btnSpin.innerText = `DISPONÍVEL EM ${h}:${m}:${s}`;
+                    }
+                }, 1000);
+            } else {
+                btnSpin.disabled = false;
+                btnSpin.classList.remove('opacity-50', 'cursor-not-allowed');
+                btnSpin.innerText = "GIRAR ROLETA AGORA";
+            }
+        }
+
+        function openChestModal() {
+            document.getElementById('chestModal').classList.remove('hidden');
+            document.getElementById('chestResultBox').innerText = '';
+            updateChestTimer();
+        }
+
+        function closeChestModal() {
+            document.getElementById('chestModal').classList.add('hidden');
+        }
+
+        function claimChest() {
+            if (!currentUser) return;
+            const now = Date.now();
+            const cooldowntime = 24 * 60 * 60 * 1000;
+
+            if (currentUser.lastChestTime && (now - currentUser.lastChestTime < cooldowntime)) {
+                showToast('Você já abriu seu baú hoje! Volte em 24 horas.');
+                return;
+            }
+
+            const btnChest = document.getElementById('btnActionChest');
+            btnChest.disabled = true;
+            document.getElementById('chestResultBox').innerHTML = `<span class="text-amber-400 animate-pulse">Destrancando o baú secreto... 🗝️</span>`;
+
+            setTimeout(() => {
+                const randomPts = Math.floor(Math.random() * (15000 - 500 + 1)) + 500;
+                currentUser.lastChestTime = Date.now();
+                currentUser.points += randomPts;
+
+                localStorage.setItem('biel_user_' + currentUser.username, JSON.stringify(currentUser));
+                renderDashboard();
+
+                document.getElementById('chestResultBox').innerHTML = `<span class="text-emerald-400">Parabéns! Você encontrou +${randomPts.toLocaleString()} Pontos no baú!</span>`;
+                showToast(`Baú aberto! +${randomPts.toLocaleString()} Pts`);
+                updateChestTimer();
+            }, 2500);
+        }
+
+        function updateChestTimer() {
+            if (!currentUser) return;
+            const btnChest = document.getElementById('btnActionChest');
+            const statusText = document.getElementById('chestStatusText');
+            const now = Date.now();
+            const cooldowntime = 24 * 60 * 60 * 1000;
+
+            if (chestTimerInterval) clearInterval(chestTimerInterval);
+
+            if (currentUser.lastChestTime && (now - currentUser.lastChestTime < cooldowntime)) {
+                btnChest.disabled = true;
+                btnChest.classList.add('opacity-50', 'cursor-not-allowed');
+                statusText.innerHTML = `<span class="text-red-400">Baú já aberto hoje.</span>`;
+
+                chestTimerInterval = setInterval(() => {
+                    const diff = (currentUser.lastChestTime + cooldowntime) - Date.now();
+                    if (diff <= 0) {
+                        clearInterval(chestTimerInterval);
+                        btnChest.disabled = false;
+                        btnChest.classList.remove('opacity-50', 'cursor-not-allowed');
+                        btnChest.innerText = "ABRIR BAÚ AGORA";
+                        statusText.innerHTML = `<i class="fa-solid fa-gift mr-1"></i> Baú Disponível`;
+                    } else {
+                        const h = Math.floor(diff / (1000 * 60 * 60)).toString().padStart(2, '0');
+                        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                        const s = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                        btnChest.innerText = `DISPONÍVEL EM ${h}:${m}:${s}`;
+                    }
+                }, 1000);
+            } else {
+                btnChest.disabled = false;
+                btnChest.classList.remove('opacity-50', 'cursor-not-allowed');
+                btnChest.innerText = "ABRIR BAÚ AGORA";
+                statusText.innerHTML = `<i class="fa-solid fa-gift mr-1"></i> Baú Disponível`;
+            }
+        }
+
         function openProfileModal() { document.getElementById('profileModal').classList.remove('hidden'); }
         function closeProfileModal() { document.getElementById('profileModal').classList.add('hidden'); }
 
         function openTermsModal() { document.getElementById('termsModal').classList.remove('hidden'); }
         function closeTermsModal() { document.getElementById('termsModal').classList.add('hidden'); }
+
+        function openReferralModal() { document.getElementById('referralModal').classList.remove('hidden'); }
+        function closeReferralModal() { document.getElementById('referralModal').classList.add('hidden'); }
+
+        function copyReferralLink() {
+            const linkText = document.getElementById('refLinkText').innerText;
+            navigator.clipboard.writeText(linkText).then(() => {
+                showToast('Link de indicação copiado!');
+            }).catch(() => {
+                showToast('Erro ao copiar link.');
+            });
+        }
 
         function toggleFaq(button) {
             const item = button.parentElement;
@@ -684,9 +1139,6 @@
                 closeWithdrawModal();
             }
         }
-
-        function openChatSupportModal() { document.getElementById('chatSupportModal').classList.remove('hidden'); }
-        function closeChatSupportModal() { document.getElementById('chatSupportModal').classList.add('hidden'); }
 
         function showToast(msg) {
             const toast = document.getElementById('toast');
